@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+
+  node-sidecar:
+    image: node:18.15-alpine
+    working_dir: /app
+    volumes:
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./node_modules:/app/node_modules
+    command: |
+      sh -c '
+        printf "Installing dependencies \\n "
+        npm install
+      
+        printf "Changing permissions on node_modules \\n "
+        chown -R node:node /app/node_modules
+      '
+
+  node-dev:
+    image: node:18.15-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    command: [sh, -c, "npm run start"]
