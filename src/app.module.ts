@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CharactersResolver } from './characters.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import {Character} from "./character";
+import { CharactersService } from './characters.service';
 
 @Module({
   imports: [
@@ -20,10 +22,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'root',
       database: 'the-last-of-us-db',
-      entities: [],
+      entities: [Character],
     }),
+    TypeOrmModule.forFeature([Character]),
   ],
   controllers: [AppController],
-  providers: [AppService, CharactersResolver],
+  providers: [AppService, CharactersResolver, CharactersService],
 })
 export class AppModule {}

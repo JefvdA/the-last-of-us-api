@@ -1,6 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @ObjectType()
+@Entity()
 export class Character {
   constructor(id: number, firstName: string, lastName: string) {
     this.id = id;
@@ -9,11 +11,14 @@ export class Character {
   }
 
   @Field(() => Int)
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Field({ nullable: true })
+  @Column()
   firstName?: string;
 
   @Field({ nullable: true })
+  @Column()
   lastName?: string;
 }
