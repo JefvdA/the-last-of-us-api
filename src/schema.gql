@@ -9,5 +9,5 @@ type Character {
 }
 
 type Query {
-  character(id: Int!): Character!
+  character: [Character!]!
 }
