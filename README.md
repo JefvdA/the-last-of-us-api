@@ -34,16 +34,19 @@ $ npm install
 
 ## Running the app
 
-```bash
-# development
-$ npm run start
+### Docker
+This project has docker support, and thus provides a development environment in docker.
+In total there are two docker services in the `docker-compose.yaml`:
+- **node-sidecar**: runs as root, responsible for installing node_modules and giving them the right permissions
+- **node**: the actual dev container which runs the API
 
-# watch mode
-$ npm run start:dev
+If you want to start up the docker containers, run following command: <br>
+`docker-compose up -d`
 
-# production mode
-$ npm run start:prod
-```
+On the first run, the node container will probably fail, as there were no `node_modules` yet. 
+But because the sidecar created them, running the `docker-compose up -d` again will fix the issue.
+
+Now, the api will be available on your localhost port 3000, as it's mapped in the `docker-compose.yaml`.
 
 ## Test
 
