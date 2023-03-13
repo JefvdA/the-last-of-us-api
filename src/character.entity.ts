@@ -1,8 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
-@Entity("characters")
+@Entity('characters')
 export class CharacterEntity {
   constructor(id: number, firstName: string, lastName: string) {
     this.id = id;

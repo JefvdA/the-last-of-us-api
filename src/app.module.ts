@@ -5,9 +5,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CharactersResolver } from './characters.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CharacterEntity } from "./character.entity";
+import { CharacterEntity } from './character.entity';
 import { CharactersService } from './characters.service';
-import {ApolloServerPluginLandingPageLocalDefault} from "@apollo/server/plugin/landingPage/default";
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { DomainModule } from './domain/domain.module';
 
 @Module({
   imports: [
@@ -25,9 +26,10 @@ import {ApolloServerPluginLandingPageLocalDefault} from "@apollo/server/plugin/l
       username: 'root',
       password: 'root',
       database: 'the-last-of-us-db',
-      autoLoadEntities: true
+      autoLoadEntities: true,
     }),
     TypeOrmModule.forFeature([CharacterEntity]),
+    DomainModule,
   ],
   controllers: [AppController],
   providers: [AppService, CharactersResolver, CharactersService],
