@@ -3,7 +3,7 @@ import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @ObjectType()
 @Entity()
-export class Character {
+export class CharacterEntity {
   constructor(id: number, firstName: string, lastName: string) {
     this.id = id;
     this.firstName = firstName;

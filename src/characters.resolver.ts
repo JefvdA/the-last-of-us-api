@@ -1,18 +1,20 @@
 import { Args, Int, Query, Resolver } from '@nestjs/graphql';
-import { Character } from './character';
+import { CharacterEntity } from './character.entity';
+import {CharactersService} from "./characters.service";
 
-@Resolver(Character)
+@Resolver(CharacterEntity)
 export class CharactersResolver {
-  @Query(() => Character)
+  constructor(
+      private readonly charactersService: CharactersService,
+  ) {}
+
+  @Query(() => CharacterEntity)
   character(@Args('id', { type: () => Int }) id: number) {
-    return new Character(id, 'Joel', 'Miller');
+    return this.charactersService.findOne(id);
   }
 
-  @Query(() => [Character])
+  @Query(() => [CharacterEntity])
   characters() {
-    return [
-      new Character(1, 'Joel', 'Miller'),
-      new Character(2, 'Ellie', 'Williams'),
-    ];
+    return this.charactersService.findAll();
   }
 }

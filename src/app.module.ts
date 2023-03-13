@@ -5,8 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CharactersResolver } from './characters.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {Character} from "./character";
+import { CharacterEntity } from "./character.entity";
 import { CharactersService } from './characters.service';
+import {dataSourceOptions} from "./config/data-source";
 
 @Module({
   imports: [
@@ -22,9 +23,9 @@ import { CharactersService } from './characters.service';
       username: 'root',
       password: 'root',
       database: 'the-last-of-us-db',
-      entities: [Character],
+      autoLoadEntities: true
     }),
-    TypeOrmModule.forFeature([Character]),
+    TypeOrmModule.forFeature([CharacterEntity]),
   ],
   controllers: [AppController],
   providers: [AppService, CharactersResolver, CharactersService],
