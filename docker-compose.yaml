@@ -1,5 +1,8 @@
 version: '3.8'
 
+volumes:
+  mysql-data:
+
 services:
 
   node-sidecar:
@@ -34,6 +37,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: the-last-of-us-db
+    volumes:
+      - mysql-data:/var/lib/mysql
 
   adminer:
     image: adminer
