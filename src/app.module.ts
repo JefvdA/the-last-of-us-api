@@ -7,7 +7,7 @@ import { CharactersResolver } from './characters.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CharacterEntity } from "./character.entity";
 import { CharactersService } from './characters.service';
-import {dataSourceOptions} from "./config/data-source";
+import {ApolloServerPluginLandingPageLocalDefault} from "@apollo/server/plugin/landingPage/default";
 
 @Module({
   imports: [
@@ -15,6 +15,8 @@ import {dataSourceOptions} from "./config/data-source";
       driver: ApolloDriver,
       autoSchemaFile: 'src/schema.gql',
       sortSchema: true,
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
