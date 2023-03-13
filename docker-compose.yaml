@@ -27,3 +27,16 @@ services:
     ports:
       - "3000:3000"
     command: [sh, -c, "npm run start:dev"]
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: the-last-of-us-db
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
