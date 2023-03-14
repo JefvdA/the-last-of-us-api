@@ -6,10 +6,10 @@ export default class CharacterSchema {
   id: string;
 
   @Field({ nullable: true })
-  firstName?: string;
+  firstName: string;
 
   @Field({ nullable: true })
-  lastName?: string;
+  lastName: string;
 
   constructor(id: string, firstName: string, lastName: string) {
     this.id = id;

@@ -6,10 +6,10 @@ export default class CharacterEntity {
   id: string;
 
   @Column()
-  firstName?: string;
+  firstName: string;
 
   @Column()
-  lastName?: string;
+  lastName: string;
 
   constructor(id: string, firstName: string, lastName: string) {
     this.id = id;

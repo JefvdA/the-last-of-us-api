@@ -3,9 +3,9 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SchemasModule } from './schemas/schemas.module';
 import { EntitiesModule } from './entities/entities.module';
 import { ServicesModule } from './services/services.module';
+import { MappersModule } from './mappers/mappers.module';
 
 @Module({
   imports: [
@@ -26,8 +26,8 @@ import { ServicesModule } from './services/services.module';
       autoLoadEntities: true,
     }),
     EntitiesModule,
-    SchemasModule,
     ServicesModule,
+    MappersModule,
   ],
   exports: [ServicesModule],
 })
