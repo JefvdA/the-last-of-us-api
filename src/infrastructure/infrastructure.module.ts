@@ -5,7 +5,8 @@ import {ApolloServerPluginLandingPageLocalDefault} from "@apollo/server/plugin/l
 import {CharactersResolver} from "../characters.resolver";
 import {CharactersService} from "../characters.service";
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {CharacterEntity} from "../character.entity";
+import { SchemasModule } from './schemas/schemas.module';
+import {EntitiesModule} from "./entities/entities.module";
 
 @Module({
     imports: [
@@ -25,7 +26,8 @@ import {CharacterEntity} from "../character.entity";
             database: 'the-last-of-us-db',
             autoLoadEntities: true,
         }),
-        TypeOrmModule.forFeature([CharacterEntity]),
+        EntitiesModule,
+        SchemasModule,
     ],
     providers: [CharactersResolver, CharactersService]
 })

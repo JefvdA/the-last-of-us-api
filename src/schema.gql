@@ -2,13 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CharacterEntity {
+type CharacterSchema {
   firstName: String
-  id: Int!
+  id: String!
   lastName: String
 }
 
 type Query {
-  character(id: Int!): CharacterEntity!
-  characters: [CharacterEntity!]!
+  character(id: Int!): CharacterSchema!
+  characters: [CharacterSchema!]!
 }
