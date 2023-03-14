@@ -1,4 +1,4 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import CharacterEntity from '../../infrastructure/entities/character.entity';
 import { CharactersService } from '../../infrastructure/services/characters.service';
 import CharacterSchema from '../../infrastructure/schemas/character.schema';
@@ -8,7 +8,7 @@ export class CharactersResolver {
   constructor(private readonly charactersService: CharactersService) {}
 
   @Query(() => CharacterSchema)
-  character(@Args('id', { type: () => Int }) id: string) {
+  character(@Args('id', { type: () => String }) id: string) {
     return this.charactersService.findOne(id);
   }
 

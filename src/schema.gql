@@ -9,6 +9,6 @@ type CharacterSchema {
 }
 
 type Query {
-  character(id: Int!): CharacterSchema!
+  character(id: String!): CharacterSchema!
   characters: [CharacterSchema!]!
 }
