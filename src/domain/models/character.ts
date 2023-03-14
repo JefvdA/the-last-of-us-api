@@ -1,4 +1,4 @@
-import Uuid from "../value-objects/uuid";
+import Uuid from '../value-objects/uuid';
 
 export default class Character {
   id: Uuid;
