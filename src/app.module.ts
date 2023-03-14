@@ -7,7 +7,12 @@ import { PresentationModule } from './presentation/presentation.module';
 import { ApplicationModule } from './application/application.module';
 
 @Module({
-  imports: [DomainModule, InfrastructureModule, PresentationModule, ApplicationModule],
+  imports: [
+    DomainModule,
+    InfrastructureModule,
+    PresentationModule,
+    ApplicationModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
