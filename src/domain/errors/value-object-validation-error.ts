@@ -4,6 +4,6 @@ export default class ValueObjectValidationError extends Error {
     public readonly errorMessage: string,
   ) {
     super(`${propertyName} is invalid: ${errorMessage}`);
-    this.name = 'InvalidValueObjectError';
+    this.name = this.constructor.name;
   }
 }

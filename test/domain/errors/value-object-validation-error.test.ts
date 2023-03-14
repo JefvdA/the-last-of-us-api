@@ -6,7 +6,7 @@ describe('InvalidValueObjectError', () => {
       'propertyName',
       'errorMessage',
     );
-    expect(error.name).toBe('InvalidValueObjectError');
+    expect(error.name).toBe(error.constructor.name);
   });
 
   it('should have the correct message', () => {
