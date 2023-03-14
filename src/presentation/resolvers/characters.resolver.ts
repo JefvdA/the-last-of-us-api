@@ -1,7 +1,7 @@
 import { Args, Int, Query, Resolver } from '@nestjs/graphql';
-import CharacterEntity from './infrastructure/entities/character.entity';
-import { CharactersService } from './infrastructure/services/characters.service';
-import CharacterSchema from './infrastructure/schemas/character.schema';
+import CharacterEntity from '../../infrastructure/entities/character.entity';
+import { CharactersService } from '../../infrastructure/services/characters.service';
+import CharacterSchema from '../../infrastructure/schemas/character.schema';
 
 @Resolver(CharacterEntity)
 export class CharactersResolver {
