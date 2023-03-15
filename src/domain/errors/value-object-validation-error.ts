@@ -1,9 +1,9 @@
 export default class ValueObjectValidationError extends Error {
   constructor(
     public readonly propertyName: string,
-    public readonly errorMessage: string,
+    public readonly propertyValue: any,
   ) {
-    super(`${propertyName} is invalid: ${errorMessage}`);
+    super(`${propertyValue} is an invalid value for ${propertyName}`);
     this.name = this.constructor.name;
   }
 }

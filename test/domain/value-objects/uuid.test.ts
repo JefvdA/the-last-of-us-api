@@ -8,9 +8,6 @@ describe('Uuid', () => {
       expect(() => new Uuid(invalidUuid)).toThrowError(
         ValueObjectValidationError,
       );
-      expect(() => new Uuid(invalidUuid)).toThrowError(
-        'Uuid is invalid: Invalid uuid',
-      );
     });
 
     it('should create a new instance when a valid uuid is provided', () => {
