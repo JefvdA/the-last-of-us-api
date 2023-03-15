@@ -7,8 +7,8 @@ export default class CharacterEntityMapper {
   toDomain(entity: CharacterEntity): Character {
     return new Character(
       entity.id,
-      entity.firstName || '',
-      entity.lastName || '',
+      entity.firstName,
+      entity.lastName,
     );
   }
 
