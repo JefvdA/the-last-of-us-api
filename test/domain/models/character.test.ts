@@ -4,7 +4,7 @@ import ValueObjectValidationError from '../../../src/domain/errors/value-object-
 
 describe('Character', () => {
   describe('constructor', () => {
-    it('should create a character with a valid id, first name, and last name', () => {
+    it('should create a character with valid arguments', () => {
       const characterId = '123e4567-e89b-12d3-a456-426655440000';
       const firstName = 'John';
       const lastName = 'Doe';
