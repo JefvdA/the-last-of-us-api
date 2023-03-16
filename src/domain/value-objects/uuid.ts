@@ -6,7 +6,7 @@ export default class Uuid {
 
   constructor(readonly value: string) {
     if (!this.isValidUuid(value))
-      throw new ValueObjectValidationError('Uuid', 'Invalid uuid');
+      throw new ValueObjectValidationError('Uuid', value);
   }
 
   private isValidUuid(uuid: string): boolean {

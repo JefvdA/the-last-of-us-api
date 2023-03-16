@@ -4,7 +4,7 @@ describe('InvalidValueObjectError', () => {
   it('should have the correct name', () => {
     const error = new ValueObjectValidationError(
       'propertyName',
-      'errorMessage',
+      'propertyValue',
     );
     expect(error.name).toBe(error.constructor.name);
   });
@@ -12,16 +12,16 @@ describe('InvalidValueObjectError', () => {
   it('should have the correct message', () => {
     const error = new ValueObjectValidationError(
       'propertyName',
-      'errorMessage',
+      'propertyValue',
     );
-    expect(error.message).toBe('propertyName is invalid: errorMessage');
+    expect(error.message).toBe('propertyValue is an invalid value for propertyName');
   });
 
   it('should have the correct property name and error message', () => {
     const propertyName = 'propertyName';
-    const errorMessage = 'errorMessage';
-    const error = new ValueObjectValidationError(propertyName, errorMessage);
+    const propertyValue = 'propertyValue';
+    const error = new ValueObjectValidationError(propertyName, propertyValue);
     expect(error.propertyName).toBe(propertyName);
-    expect(error.errorMessage).toBe(errorMessage);
+    expect(error.propertyValue).toBe(propertyValue);
   });
 });
