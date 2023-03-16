@@ -77,6 +77,7 @@
       ".module.ts"
     ],
     "coverageDirectory": "./coverage",
+    "coverageReporters": ["json", "lcov", "text", "html"],
     "testEnvironment": "node"
   }
 }
