@@ -7,7 +7,7 @@ import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
 
 @Injectable()
-export class CharactersService {
+export class CharacterService {
   constructor(
     @InjectRepository(CharacterEntity)
     private readonly charactersRepository: Repository<CharacterEntity>,

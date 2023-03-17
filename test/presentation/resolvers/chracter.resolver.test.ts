@@ -1,22 +1,22 @@
-import {CharactersResolver} from "../../../src/presentation/resolvers/characters.resolver";
+import {CharacterResolver} from "../../../src/presentation/resolvers/character.resolver";
 import {Test} from "@nestjs/testing";
-import {CharactersService} from "../../../src/infrastructure/services/characters.service";
+import {CharacterService} from "../../../src/infrastructure/services/character.service";
 import CharacterSchemaMapper from "../../../src/presentation/mappers/character-schema.mapper";
-import CharactersServiceMock from "../mocks/characters.service.mock";
+import CharactersServiceMock from "../mocks/character.service.mock";
 import CharacterSchema from "../../../src/presentation/schemas/character.schema";
 
-describe(CharactersResolver.name, () => {
-    let resolver: CharactersResolver;
-    let service: CharactersService;
+describe(CharacterResolver.name, () => {
+    let resolver: CharacterResolver;
+    let service: CharacterService;
     let mapper: CharacterSchemaMapper;
 
     beforeAll(async () => {
        const module = await Test.createTestingModule({
-           providers: [CharactersResolver, CharacterSchemaMapper, CharactersServiceMock]
+           providers: [CharacterResolver, CharacterSchemaMapper, CharactersServiceMock]
        }).compile();
 
-       resolver = module.get(CharactersResolver);
-       service = module.get(CharactersService);
+       resolver = module.get(CharacterResolver);
+       service = module.get(CharacterService);
        mapper = module.get(CharacterSchemaMapper);
     });
 

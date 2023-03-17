@@ -1,5 +1,5 @@
 import {Test} from "@nestjs/testing";
-import {CharactersService} from "../../../src/infrastructure/services/characters.service";
+import {CharacterService} from "../../../src/infrastructure/services/character.service";
 import CharacterEntityMapper from "../../../src/infrastructure/mappers/character-entity.mapper";
 import CharacterRepositoryMock from "../mocks/character.repository.mock";
 import {Repository} from "typeorm";
@@ -7,17 +7,17 @@ import CharacterEntity from "../../../src/infrastructure/entities/character.enti
 import {getRepositoryToken} from "@nestjs/typeorm";
 import NotFoundError from "../../../src/domain/errors/not-found-error";
 
-describe(CharactersService.name, () => {
-    let service: CharactersService;
+describe(CharacterService.name, () => {
+    let service: CharacterService;
     let repository: Repository<CharacterEntity>;
     let mapper: CharacterEntityMapper;
 
     beforeAll(async () => {
         const module = await Test.createTestingModule({
-            providers: [CharactersService, CharacterEntityMapper, CharacterRepositoryMock]
+            providers: [CharacterService, CharacterEntityMapper, CharacterRepositoryMock]
         }).compile();
 
-        service = module.get(CharactersService);
+        service = module.get(CharacterService);
         repository = module.get(getRepositoryToken(CharacterEntity));
         mapper = module.get(CharacterEntityMapper);
     });

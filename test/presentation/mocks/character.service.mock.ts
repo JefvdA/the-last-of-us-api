@@ -1,7 +1,7 @@
-import {CharactersService} from "../../../src/infrastructure/services/characters.service";
+import {CharacterService} from "../../../src/infrastructure/services/character.service";
 import Character from "../../../src/domain/models/character";
 
-class CharactersServiceMock {
+class CharacterServiceMock {
     findAll(): Promise<Character[]> {
         return Promise.resolve([
             new Character(
@@ -22,6 +22,6 @@ class CharactersServiceMock {
     }
 }
 export default {
-    provide: CharactersService,
-    useClass: CharactersServiceMock
+    provide: CharacterService,
+    useClass: CharacterServiceMock
 }

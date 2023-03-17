@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CharactersResolver } from './characters.resolver';
+import { CharacterResolver } from './character.resolver';
 import { ServicesModule } from '../../infrastructure/services/services.module';
 import { MappersModule } from '../mappers/mappers.module';
 
-const resolvers: Array<any> = [CharactersResolver];
+const resolvers: Array<any> = [CharacterResolver];
 
 @Module({
   imports: [ServicesModule, MappersModule],

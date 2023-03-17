@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CharactersService } from './characters.service';
+import { CharacterService } from './character.service';
 import { EntitiesModule } from '../entities/entities.module';
 import { MappersModule } from '../mappers/mappers.module';
 
-const services: Array<any> = [CharactersService];
+const services: Array<any> = [CharacterService];
 
 @Module({
   imports: [EntitiesModule, MappersModule],

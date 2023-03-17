@@ -1,12 +1,12 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { CharactersService } from '../../infrastructure/services/characters.service';
+import { CharacterService } from '../../infrastructure/services/character.service';
 import CharacterSchema from '../schemas/character.schema';
 import CharacterSchemaMapper from '../mappers/character-schema.mapper';
 
 @Resolver()
-export class CharactersResolver {
+export class CharacterResolver {
   constructor(
-    private readonly charactersService: CharactersService,
+    private readonly charactersService: CharacterService,
     private readonly mapper: CharacterSchemaMapper,
   ) {}
 
