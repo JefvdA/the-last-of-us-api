@@ -61,8 +61,8 @@ describe(CharacterResolver.name, () => {
     });
 
     describe('createCharacter', () => {
-       it('should call useCase.createCharacter()', async () => {
-          const spy = jest.spyOn(useCase, 'createCharacter');
+       it('should call useCase.create()', async () => {
+          const spy = jest.spyOn(useCase, 'create');
 
           resolver.createCharacter({
               firstName: 'John',

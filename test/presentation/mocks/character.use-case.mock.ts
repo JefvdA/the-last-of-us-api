@@ -23,7 +23,7 @@ class CharacterUseCaseMock {
         );
     }
 
-    createCharacter(character: CharacterCreationArgument): Promise<Character> {
+    create(character: CharacterCreationArgument): Promise<Character> {
         return Promise.resolve(new Character(
             '00000000-0000-0000-0000-000000000000',
             character.firstName,
