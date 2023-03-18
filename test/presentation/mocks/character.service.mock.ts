@@ -1,4 +1,4 @@
-import {CharacterService} from "../../../src/infrastructure/services/character.service";
+import {CharacterService} from "../../../src/application/services/character.service";
 import Character from "../../../src/domain/models/character";
 
 class CharacterServiceMock {

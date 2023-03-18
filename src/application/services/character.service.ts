@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import CharacterEntity from '../entities/character.entity';
+import CharacterEntity from '../../infrastructure/entities/character.entity';
 import { Repository } from 'typeorm';
-import CharacterEntityMapper from '../mappers/character-entity.mapper';
+import CharacterEntityMapper from '../../infrastructure/mappers/character-entity.mapper';
 import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
 

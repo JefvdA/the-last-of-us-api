@@ -1,6 +1,6 @@
 import {CharacterResolver} from "../../../src/presentation/resolvers/character.resolver";
 import {Test} from "@nestjs/testing";
-import {CharacterService} from "../../../src/infrastructure/services/character.service";
+import {CharacterService} from "../../../src/application/services/character.service";
 import CharacterSchemaMapper from "../../../src/presentation/mappers/character-schema.mapper";
 import CharactersServiceMock from "../mocks/character.service.mock";
 import CharacterSchema from "../../../src/presentation/schemas/character.schema";

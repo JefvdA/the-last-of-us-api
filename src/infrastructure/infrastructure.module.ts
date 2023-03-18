@@ -4,7 +4,6 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntitiesModule } from './entities/entities.module';
-import { ServicesModule } from './services/services.module';
 import { MappersModule } from './mappers/mappers.module';
 
 @Module({
@@ -26,9 +25,7 @@ import { MappersModule } from './mappers/mappers.module';
       autoLoadEntities: true,
     }),
     EntitiesModule,
-    ServicesModule,
     MappersModule,
   ],
-  exports: [ServicesModule],
 })
 export class InfrastructureModule {}

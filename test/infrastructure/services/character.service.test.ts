@@ -1,5 +1,5 @@
 import {Test} from "@nestjs/testing";
-import {CharacterService} from "../../../src/infrastructure/services/character.service";
+import {CharacterService} from "../../../src/application/services/character.service";
 import CharacterEntityMapper from "../../../src/infrastructure/mappers/character-entity.mapper";
 import CharacterRepositoryMock from "../mocks/character.repository.mock";
 import {Repository} from "typeorm";

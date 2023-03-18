@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CharacterService } from './character.service';
-import { EntitiesModule } from '../entities/entities.module';
-import { MappersModule } from '../mappers/mappers.module';
+import { EntitiesModule } from '../../infrastructure/entities/entities.module';
+import { MappersModule } from '../../infrastructure/mappers/mappers.module';
 
 const services: Array<any> = [CharacterService];
 
