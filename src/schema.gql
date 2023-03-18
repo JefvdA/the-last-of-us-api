@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CharacterFilterOptionsArgumentSchema {
+  firstName: String
+  lastName: String
+}
+
 type CharacterSchema {
   firstName: String
   id: String!
@@ -10,5 +15,5 @@ type CharacterSchema {
 
 type Query {
   character(id: String!): CharacterSchema!
-  characters: [CharacterSchema!]!
+  characters(args: CharacterFilterOptionsArgumentSchema): [CharacterSchema!]!
 }

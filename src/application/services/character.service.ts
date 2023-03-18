@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import CharacterEntityMapper from '../../infrastructure/mappers/character-entity.mapper';
 import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
+import CharacterFilterOptionsArgument from "../arguments/character-filter-options.argument";
 
 @Injectable()
 export class CharacterService {
@@ -14,7 +15,7 @@ export class CharacterService {
     private readonly mapper: CharacterEntityMapper,
   ) {}
 
-  findAll(): Promise<Character[]> {
+  findAll(filterOptions?: CharacterFilterOptionsArgument): Promise<Character[]> {
     return this.characterRepository.find().then((entities): Character[] => {
       return this.mapper.multipleToDomain(entities);
     });
