@@ -2,6 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {CharacterService} from "../services/character.service";
 import Character from "../../domain/models/character";
 import Uuid from "../../domain/value-objects/uuid";
+import CharacterFilterOptionsArgument from "../arguments/character-filter-options.argument";
 
 @Injectable()
 export default class CharacterUseCase {
@@ -9,8 +10,8 @@ export default class CharacterUseCase {
         private readonly characterService: CharacterService
     ) {}
 
-    findAll(): Promise<Character[]> {
-        return this.characterService.findAll();
+    findAll(filterOptions?: CharacterFilterOptionsArgument): Promise<Character[]> {
+        return this.characterService.findAll(filterOptions);
     }
 
     findOne(uuid: Uuid): Promise<Character> {
