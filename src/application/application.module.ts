@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
+import { UseCasesModule } from './use-cases/use-cases.module';
 
 @Module({
-  imports: [],
+  imports: [UseCasesModule],
 })
 export class ApplicationModule {}

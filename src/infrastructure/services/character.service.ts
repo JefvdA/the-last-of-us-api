@@ -10,18 +10,18 @@ import NotFoundError from "../../domain/errors/not-found-error";
 export class CharacterService {
   constructor(
     @InjectRepository(CharacterEntity)
-    private readonly charactersRepository: Repository<CharacterEntity>,
+    private readonly characterRepository: Repository<CharacterEntity>,
     private readonly mapper: CharacterEntityMapper,
   ) {}
 
   findAll(): Promise<Character[]> {
-    return this.charactersRepository.find().then((entities): Character[] => {
+    return this.characterRepository.find().then((entities): Character[] => {
       return this.mapper.multipleToDomain(entities);
     });
   }
 
   findOne(id: string): Promise<Character> {
-    return this.charactersRepository
+    return this.characterRepository
       .findOneBy({ id })
       .then((entity): Character => {
         if (entity === null) {
