@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 
 import CharacterSchema from '../schemas/character.schema';
 import CharacterSchemaMapper from '../mappers/character-schema.mapper';
@@ -13,17 +13,26 @@ export class CharacterResolver {
     private readonly mapper: CharacterSchemaMapper,
   ) {}
 
-  @Query(() => [CharacterSchema])
+  @Query(returns => [CharacterSchema])
   characters(@Args('args', { nullable: true }) args?: CharacterFilterOptionsArgumentSchema) {
     return this.useCase.findAll(args).then((entities) => {
       return this.mapper.multipleToSchema(entities);
     });
   }
 
-  @Query(() => CharacterSchema)
+  @Query(returns => CharacterSchema)
   character(@Args('id') id: string) {
     return this.useCase.findOne(new Uuid(id)).then((entity) => {
       return this.mapper.toSchema(entity);
     });
+  }
+
+  @Mutation(returns => CharacterSchema)
+  createCharacter() {
+    return new CharacterSchema(
+      '00000000-0000-0000-0000-000000000000',
+        '',
+        ''
+    );
   }
 }

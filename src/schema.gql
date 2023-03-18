@@ -13,6 +13,10 @@ type CharacterSchema {
   lastName: String
 }
 
+type Mutation {
+  createCharacter: CharacterSchema!
+}
+
 type Query {
   character(id: String!): CharacterSchema!
   characters(args: CharacterFilterOptionsArgumentSchema): [CharacterSchema!]!

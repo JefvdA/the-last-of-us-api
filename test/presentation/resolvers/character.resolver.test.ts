@@ -57,4 +57,10 @@ describe(CharacterResolver.name, () => {
           });
        });
     });
+
+    describe('createCharacter', () => {
+       it('should call useCase.createCharacter()', async () => {
+          resolver.createCharacter();
+       });
+    });
 });
