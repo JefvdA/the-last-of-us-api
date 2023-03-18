@@ -1,4 +1,4 @@
-import {FindManyOptions, FindOptionsWhere, Repository} from "typeorm";
+import {DeepPartial, FindManyOptions, FindOptionsWhere, Repository} from "typeorm";
 import {getRepositoryToken} from "@nestjs/typeorm";
 import CharacterEntity from "../../../src/infrastructure/entities/character.entity";
 

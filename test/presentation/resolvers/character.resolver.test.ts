@@ -67,9 +67,9 @@ describe(CharacterResolver.name, () => {
           resolver.createCharacter({
               firstName: 'John',
               lastName: 'Doe'
-          }).then(() => {
-            expect(spy).toBeCalled();
           });
+
+          expect(spy).toBeCalled();
        });
     });
 });

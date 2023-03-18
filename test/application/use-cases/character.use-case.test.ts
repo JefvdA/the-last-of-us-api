@@ -1,9 +1,9 @@
 import CharacterUseCase from "../../../src/application/use-cases/character.use-case";
 import {CharacterService} from "../../../src/application/services/character.service";
 import {Test} from "@nestjs/testing";
-import CharacterRepositoryMock from "../../infrastructure/mocks/character.repository.mock";
 import CharacterEntityMapper from "../../../src/infrastructure/mappers/character-entity.mapper";
 import Uuid from "../../../src/domain/value-objects/uuid";
+import CharacterServiceMock from "../../presentation/mocks/character.service.mock";
 
 describe(CharacterUseCase.name, () => {
    let useCase: CharacterUseCase;
@@ -11,7 +11,7 @@ describe(CharacterUseCase.name, () => {
 
    beforeAll(async () => {
       const module = await Test.createTestingModule({
-         providers: [CharacterUseCase, CharacterService, CharacterRepositoryMock, CharacterEntityMapper]
+         providers: [CharacterUseCase, CharacterServiceMock, CharacterEntityMapper]
       }).compile();
 
       useCase = module.get(CharacterUseCase);
@@ -45,9 +45,9 @@ describe(CharacterUseCase.name, () => {
          useCase.create({
             firstName: 'John',
             lastName: 'Doe'
-         }).then(() => {
-            expect(spy).toBeCalled();
-         })
+         });
+
+         expect(spy).toBeCalled();
       });
    });
 });

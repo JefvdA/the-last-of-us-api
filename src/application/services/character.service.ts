@@ -34,11 +34,9 @@ export class CharacterService {
       });
   }
 
-  create(character: CharacterCreationArgument): Promise<Character> {
-    return Promise.resolve(new Character(
-        '00000000-0000-0000-0000-000000000000',
-        character.firstName,
-        character.lastName
-    ));
+  create(character: CharacterCreationArgument): Character {
+    const newCharacter = this.characterRepository.create(character);
+
+    return this.mapper.toDomain(newCharacter);
   }
 }

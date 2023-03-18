@@ -19,7 +19,7 @@ export default class CharacterUseCase {
         return this.characterService.findOne(uuid.value);
     }
 
-    create(character: CharacterCreationArgument): Promise<Character> {
+    create(character: CharacterCreationArgument): Character {
         return this.characterService.create(character);
     }
 }
