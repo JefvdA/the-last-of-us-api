@@ -60,7 +60,11 @@ describe(CharacterResolver.name, () => {
 
     describe('createCharacter', () => {
        it('should call useCase.createCharacter()', async () => {
-          resolver.createCharacter();
+          const spy = jest.spyOn(useCase, 'createCharacter');
+
+          resolver.createCharacter().then(() => {
+
+          });
        });
     });
 });

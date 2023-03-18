@@ -4,7 +4,8 @@ import CharacterSchema from '../schemas/character.schema';
 import CharacterSchemaMapper from '../mappers/character-schema.mapper';
 import CharacterUseCase from "../../application/use-cases/character.use-case";
 import Uuid from "../../domain/value-objects/uuid";
-import CharacterFilterOptionsArgumentSchema from "../schemas/arguments/character-filter-options.argument.schema";
+import CharacterFilterOptionsArgumentSchema from "../schemas/arguments/character/character-filter-options.argument.schema";
+import CharacterCreationArgumentSchema from "../schemas/arguments/character/character-creation.argument.schema";
 
 @Resolver()
 export class CharacterResolver {
@@ -28,11 +29,11 @@ export class CharacterResolver {
   }
 
   @Mutation(returns => CharacterSchema)
-  createCharacter() {
+  createCharacter(@Args('character') character: CharacterCreationArgumentSchema) {
     return new CharacterSchema(
       '00000000-0000-0000-0000-000000000000',
-        '',
-        ''
+        character.firstName,
+        character.lastName
     );
   }
 }

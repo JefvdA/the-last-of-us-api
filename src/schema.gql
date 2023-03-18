@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CharacterCreationArgumentSchema {
+  firstName: String!
+  lastName: String!
+}
+
 input CharacterFilterOptionsArgumentSchema {
   firstName: String
   lastName: String
@@ -14,7 +19,7 @@ type CharacterSchema {
 }
 
 type Mutation {
-  createCharacter: CharacterSchema!
+  createCharacter(character: CharacterCreationArgumentSchema!): CharacterSchema!
 }
 
 type Query {
