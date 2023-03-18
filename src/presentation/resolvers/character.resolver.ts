@@ -30,10 +30,6 @@ export class CharacterResolver {
 
   @Mutation(returns => CharacterSchema)
   createCharacter(@Args('character') character: CharacterCreationArgumentSchema) {
-    return new CharacterSchema(
-      '00000000-0000-0000-0000-000000000000',
-        character.firstName,
-        character.lastName
-    );
+    return this.useCase.createCharacter(character);
   }
 }

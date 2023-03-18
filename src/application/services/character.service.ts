@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import CharacterEntityMapper from '../../infrastructure/mappers/character-entity.mapper';
 import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
-import CharacterFilterOptionsArgument from "../arguments/character-filter-options.argument";
+import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
 
 @Injectable()
 export class CharacterService {

@@ -1,6 +1,7 @@
 import Character from "../../../src/domain/models/character";
 import Uuid from "../../../src/domain/value-objects/uuid";
 import CharacterUseCase from "../../../src/application/use-cases/character.use-case";
+import CharacterCreationArgument from "../../../src/application/arguments/character/CharacterCreationArgument";
 
 class CharacterUseCaseMock {
     findAll(): Promise<Character[]> {
@@ -20,6 +21,14 @@ class CharacterUseCaseMock {
                 'Doe'
             )
         );
+    }
+
+    createCharacter(character: CharacterCreationArgument): Promise<Character> {
+        return Promise.resolve(new Character(
+            '00000000-0000-0000-0000-000000000000',
+            character.firstName,
+            character.lastName
+        ));
     }
 }
 export default {
