@@ -10,8 +10,8 @@ describe('Character', () => {
       const lastName = 'Doe';
       const character = new Character(characterId, firstName, lastName);
       expect(character).toBeDefined();
-      expect(character.id).toBeInstanceOf(Uuid);
-      expect(character.id.value).toBe(characterId);
+      expect(character.uuid).toBeInstanceOf(Uuid);
+      expect(character.uuid.value).toBe(characterId);
       expect(character.firstName).toBe(firstName);
       expect(character.lastName).toBe(lastName);
     });

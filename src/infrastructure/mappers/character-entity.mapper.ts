@@ -6,7 +6,7 @@ import Character from '../../domain/models/character';
 export default class CharacterEntityMapper {
   toDomain(entity: CharacterEntity): Character {
     return new Character(
-      entity.id,
+      entity.uuid,
       entity.firstName,
       entity.lastName,
     );

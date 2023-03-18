@@ -18,7 +18,7 @@ describe(CharacterSchemaMapper.name, () => {
             const schema = new CharacterSchema(id, firstName, lastname);
 
             const domain = mapper.toDomain(schema);
-            expect(domain.id.value).toBe(id);
+            expect(domain.uuid.value).toBe(id);
             expect(domain.firstName).toBe(firstName);
             expect(domain.lastName).toBe(lastname);
         });
@@ -45,11 +45,11 @@ describe(CharacterSchemaMapper.name, () => {
 
             const [domain1, domain2] = mapper.multipleToDomain([schema1, schema2]);
 
-            expect(domain1.id.value).toBe(schema1.id);
+            expect(domain1.uuid.value).toBe(schema1.id);
             expect(domain1.firstName).toBe(schema1.firstName);
             expect(domain1.lastName).toBe(schema1.lastName);
 
-            expect(domain2.id.value).toBe(schema2.id);
+            expect(domain2.uuid.value).toBe(schema2.id);
             expect(domain2.firstName).toBe(schema2.firstName);
             expect(domain2.lastName).toBe(schema2.lastName);
         });
@@ -62,11 +62,11 @@ describe(CharacterSchemaMapper.name, () => {
 
             const [schema1, schema2] = mapper.multipleToSchema([domain1, domain2]);
 
-            expect(schema1.id).toBe(domain1.id.value);
+            expect(schema1.id).toBe(domain1.uuid.value);
             expect(schema1.firstName).toBe(domain1.firstName);
             expect(schema1.lastName).toBe(domain1.lastName);
 
-            expect(schema2.id).toBe(domain2.id.value);
+            expect(schema2.id).toBe(domain2.uuid.value);
             expect(schema2.firstName).toBe(domain2.firstName);
             expect(schema2.lastName).toBe(domain2.lastName);
         });

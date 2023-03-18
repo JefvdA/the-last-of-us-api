@@ -13,7 +13,7 @@ export default class CharacterUseCase {
         return this.characterService.findAll();
     }
 
-    findOne(id: Uuid): Promise<Character> {
-        return this.characterService.findOne(id.value);
+    findOne(uuid: Uuid): Promise<Character> {
+        return this.characterService.findOne(uuid.value);
     }
 }

@@ -10,7 +10,7 @@ export default class CharacterSchemaMapper {
 
   toSchema(domain: Character): CharacterSchema {
     return new CharacterSchema(
-      domain.id.value,
+      domain.uuid.value,
       domain.firstName,
       domain.lastName,
     );

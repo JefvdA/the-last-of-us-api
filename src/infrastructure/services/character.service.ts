@@ -20,9 +20,9 @@ export class CharacterService {
     });
   }
 
-  findOne(id: string): Promise<Character> {
+  findOne(uuid: string): Promise<Character> {
     return this.characterRepository
-      .findOneBy({ id })
+      .findOneBy({ uuid: uuid })
       .then((entity): Character => {
         if (entity === null) {
           throw new NotFoundError(Character.name);

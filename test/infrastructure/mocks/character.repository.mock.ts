@@ -6,7 +6,7 @@ class CharacterRepositoryMock extends Repository<CharacterEntity> {
     find(options?: FindManyOptions<CharacterEntity>): Promise<CharacterEntity[]> {
         return Promise.resolve([
             {
-                id: '00000000-0000-0000-0000-000000000000',
+                uuid: '00000000-0000-0000-0000-000000000000',
                 firstName: 'John',
                 lastName: 'Doe'
             }
@@ -15,7 +15,7 @@ class CharacterRepositoryMock extends Repository<CharacterEntity> {
 
     findOneBy(where: FindOptionsWhere<CharacterEntity> | FindOptionsWhere<CharacterEntity>[]): Promise<CharacterEntity | null> {
         return Promise.resolve({
-            id: '00000000-0000-0000-0000-000000000000',
+            uuid: '00000000-0000-0000-0000-000000000000',
             firstName: 'John',
             lastName: 'Doe'
         });
