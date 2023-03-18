@@ -23,8 +23,8 @@ describe(CharacterService.name, () => {
     });
 
     describe('findAll', () => {
-        it('should call repository.find()', async () => {
-            const spy = jest.spyOn(repository, 'find');
+        it('should call repository.findBy()', async () => {
+            const spy = jest.spyOn(repository, 'findBy');
 
             service.findAll().then(() => {
                 expect(spy).toBeCalled();
