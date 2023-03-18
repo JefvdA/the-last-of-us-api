@@ -6,6 +6,7 @@ import CharacterEntityMapper from '../../infrastructure/mappers/character-entity
 import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
 import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
+import CharacterCreationArgument from "../arguments/character/CharacterCreationArgument";
 
 @Injectable()
 export class CharacterService {
@@ -31,5 +32,13 @@ export class CharacterService {
 
         return this.mapper.toDomain(entity);
       });
+  }
+
+  create(character: CharacterCreationArgument): Promise<Character> {
+    return Promise.resolve(new Character(
+        '00000000-0000-0000-0000-000000000000',
+        character.firstName,
+        character.lastName
+    ));
   }
 }

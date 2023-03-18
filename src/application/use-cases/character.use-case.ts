@@ -20,10 +20,6 @@ export default class CharacterUseCase {
     }
 
     create(character: CharacterCreationArgument): Promise<Character> {
-        return Promise.resolve(new Character(
-            '00000000-0000-0000-0000-000000000000',
-            character.firstName,
-            character.lastName
-        ));
+        return this.characterService.create(character);
     }
 }

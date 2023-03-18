@@ -33,8 +33,21 @@ describe(CharacterUseCase.name, () => {
          const spy = jest.spyOn(service, 'findOne');
 
          useCase.findOne(new Uuid('00000000-0000-0000-0000-000000000000')).then(() => {
-
+            expect(spy).toBeCalled();
          });
+      });
+   });
+
+   describe('createCharacter', () => {
+      it('should call service.createCharacter', () => {
+         const spy = jest.spyOn(service, 'create');
+
+         useCase.create({
+            firstName: 'John',
+            lastName: 'Doe'
+         }).then(() => {
+            expect(spy).toBeCalled();
+         })
       });
    });
 });
