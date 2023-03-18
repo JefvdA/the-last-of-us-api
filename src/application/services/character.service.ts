@@ -16,7 +16,7 @@ export class CharacterService {
   ) {}
 
   findAll(filterOptions?: CharacterFilterOptionsArgument): Promise<Character[]> {
-    return this.characterRepository.find().then((entities): Character[] => {
+    return this.characterRepository.findBy(filterOptions || {}).then((entities): Character[] => {
       return this.mapper.multipleToDomain(entities);
     });
   }
