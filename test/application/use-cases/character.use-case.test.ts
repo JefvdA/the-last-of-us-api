@@ -39,7 +39,7 @@ describe(CharacterUseCase.name, () => {
    });
 
    describe('createCharacter', () => {
-      it('should call service.createCharacter', () => {
+      it('should call service.create', () => {
          const spy = jest.spyOn(service, 'create');
 
          useCase.create({

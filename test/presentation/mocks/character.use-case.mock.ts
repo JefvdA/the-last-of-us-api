@@ -23,12 +23,12 @@ class CharacterUseCaseMock {
         );
     }
 
-    create(character: CharacterCreationArgument): Character {
-        return new Character(
+    create(character: CharacterCreationArgument): Promise<Character> {
+        return Promise.resolve(new Character(
             '00000000-0000-0000-0000-000000000000',
             character.firstName,
             character.lastName
-        );
+        ));
     }
 }
 export default {

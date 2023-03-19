@@ -21,12 +21,12 @@ class CharacterRepositoryMock {
         });
     }
 
-    create(): CharacterEntity {
-        return {
+    save(): Promise<CharacterEntity> {
+        return Promise.resolve({
             uuid: '00000000-0000-0000-0000-000000000000',
             firstName: 'John',
             lastName: 'Doe'
-        };
+        });
     }
 }
 export default {
