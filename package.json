@@ -29,6 +29,7 @@
     "@nestjs/graphql": "^11.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "apollo-server-errors": "^3.3.1",
     "graphql": "^16.6.0",
     "mysql2": "^3.2.0",
     "reflect-metadata": "^0.1.13",
@@ -77,7 +78,12 @@
       ".module.ts"
     ],
     "coverageDirectory": "./coverage",
-    "coverageReporters": ["json", "lcov", "text", "html"],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ],
     "testEnvironment": "node"
   }
 }
