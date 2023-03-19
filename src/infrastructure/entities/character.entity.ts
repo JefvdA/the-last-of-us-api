@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, Entity, PrimaryGeneratedColumn, Unique} from 'typeorm';
 
 @Entity('characters')
+@Unique(['firstName', 'lastName'])
 export default class CharacterEntity {
   @PrimaryGeneratedColumn('uuid')
   uuid: string;
