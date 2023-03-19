@@ -7,6 +7,10 @@ input CharacterCreationArgumentSchema {
   lastName: String!
 }
 
+type CharacterCreationResponseSchema {
+  uuid: String!
+}
+
 input CharacterFilterOptionsArgumentSchema {
   firstName: String
   lastName: String
@@ -19,7 +23,7 @@ type CharacterSchema {
 }
 
 type Mutation {
-  createCharacter(character: CharacterCreationArgumentSchema!): CharacterSchema!
+  createCharacter(character: CharacterCreationArgumentSchema!): CharacterCreationResponseSchema!
 }
 
 type Query {

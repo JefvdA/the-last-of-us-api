@@ -4,6 +4,7 @@ import Character from "../../domain/models/character";
 import Uuid from "../../domain/value-objects/uuid";
 import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
 import CharacterCreationArgument from "../arguments/character/CharacterCreationArgument";
+import CharacterCreationDto from "../dtos/character-creation.dto";
 
 @Injectable()
 export default class CharacterUseCase {
@@ -19,7 +20,7 @@ export default class CharacterUseCase {
         return this.characterService.findOne(uuid.value);
     }
 
-    create(character: CharacterCreationArgument): Promise<Character> {
+    create(character: CharacterCreationArgument): Promise<CharacterCreationDto> {
         return this.characterService.create(character);
     }
 }
