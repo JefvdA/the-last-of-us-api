@@ -67,8 +67,8 @@ describe(CharacterService.name, () => {
     });
 
     describe('create', () => {
-        it('should call repository.save()', () => {
-            const spy = jest.spyOn(repository, 'save');
+        it('should call repository.insert()', () => {
+            const spy = jest.spyOn(repository, 'insert');
 
             service.create({
                firstName: 'John',
