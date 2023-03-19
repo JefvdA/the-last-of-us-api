@@ -71,5 +71,16 @@ describe(CharacterResolver.name, () => {
 
           expect(spy).toBeCalled();
        });
+
+       it('should call mapper.toSchema()', async () => {
+           const spy = jest.spyOn(mapper, 'toSchema');
+
+           resolver.createCharacter({
+               firstName: 'John',
+               lastName: 'Doe'
+           });
+
+           expect(spy).toBeCalled();
+       })
     });
 });

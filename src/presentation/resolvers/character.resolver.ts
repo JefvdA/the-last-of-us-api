@@ -16,20 +16,22 @@ export class CharacterResolver {
 
   @Query(returns => [CharacterSchema])
   characters(@Args('args', { nullable: true }) args?: CharacterFilterOptionsArgumentSchema) {
-    return this.useCase.findAll(args).then((entities) => {
-      return this.mapper.multipleToSchema(entities);
+    return this.useCase.findAll(args).then((domains) => {
+      return this.mapper.multipleToSchema(domains);
     });
   }
 
   @Query(returns => CharacterSchema)
   character(@Args('id') id: string) {
-    return this.useCase.findOne(new Uuid(id)).then((entity) => {
-      return this.mapper.toSchema(entity);
+    return this.useCase.findOne(new Uuid(id)).then((domain) => {
+      return this.mapper.toSchema(domain);
     });
   }
 
   @Mutation(returns => CharacterSchema)
   createCharacter(@Args('character') character: CharacterCreationArgumentSchema) {
-    return this.useCase.create(character);
+    return this.useCase.create(character).then((domain) => {
+      return this.mapper.toSchema(domain);
+    });
   }
 }

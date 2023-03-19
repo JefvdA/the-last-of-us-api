@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('characters')
 export default class CharacterEntity {
   @PrimaryGeneratedColumn('uuid')
-  readonly uuid: string = "";
+  uuid: string;
 
   @Column()
   firstName: string;

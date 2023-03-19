@@ -34,9 +34,9 @@ export class CharacterService {
       });
   }
 
-  create(character: CharacterCreationArgument): Character {
-    const newCharacter = this.characterRepository.create(character);
-
-    return this.mapper.toDomain(newCharacter);
+  create(character: CharacterCreationArgument): Promise<Character> {
+    return this.characterRepository.save(character).then((entity) => {
+      return this.mapper.toDomain(entity);
+    });
   }
 }
