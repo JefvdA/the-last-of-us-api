@@ -2,8 +2,8 @@ import {DeepPartial, FindManyOptions, FindOptionsWhere, Repository} from "typeor
 import {getRepositoryToken} from "@nestjs/typeorm";
 import CharacterEntity from "../../../src/infrastructure/entities/character.entity";
 
-class CharacterRepositoryMock extends Repository<CharacterEntity> {
-    findBy(where: FindOptionsWhere<CharacterEntity> | FindOptionsWhere<CharacterEntity>[]): Promise<CharacterEntity[]> {
+class CharacterRepositoryMock {
+    findBy(): Promise<CharacterEntity[]> {
         return Promise.resolve([
             {
                 uuid: '00000000-0000-0000-0000-000000000000',
@@ -13,12 +13,20 @@ class CharacterRepositoryMock extends Repository<CharacterEntity> {
         ]);
     }
 
-    findOneBy(where: FindOptionsWhere<CharacterEntity> | FindOptionsWhere<CharacterEntity>[]): Promise<CharacterEntity | null> {
+    findOneBy(): Promise<CharacterEntity | null> {
         return Promise.resolve({
             uuid: '00000000-0000-0000-0000-000000000000',
             firstName: 'John',
             lastName: 'Doe'
         });
+    }
+
+    create(): CharacterEntity {
+        return {
+            uuid: '00000000-0000-0000-0000-000000000000',
+            firstName: 'John',
+            lastName: 'Doe'
+        };
     }
 }
 export default {
