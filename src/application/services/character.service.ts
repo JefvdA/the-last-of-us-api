@@ -7,6 +7,7 @@ import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
 import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
 import CharacterCreationArgument from "../arguments/character/CharacterCreationArgument";
+import CharacterCreationDto from "../dtos/character-creation.dto";
 
 @Injectable()
 export class CharacterService {
@@ -34,9 +35,11 @@ export class CharacterService {
       });
   }
 
-  create(character: CharacterCreationArgument): Promise<Character> {
-    return this.characterRepository.save(character).then((entity) => {
-      return this.mapper.toDomain(entity);
+  create(character: CharacterCreationArgument): Promise<CharacterCreationDto> {
+    return this.characterRepository.insert(character).then((result) => {
+      return {
+        uuid: result.identifiers[0].uuid
+      }
     });
   }
 }
