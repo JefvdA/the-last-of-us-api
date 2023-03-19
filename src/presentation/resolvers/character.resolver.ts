@@ -1,10 +1,11 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
 
 import CharacterSchema from '../schemas/character.schema';
 import CharacterSchemaMapper from '../mappers/character-schema.mapper';
 import CharacterUseCase from "../../application/use-cases/character.use-case";
 import Uuid from "../../domain/value-objects/uuid";
-import CharacterFilterOptionsArgumentSchema from "../schemas/arguments/character-filter-options.argument.schema";
+import CharacterFilterOptionsArgumentSchema from "../schemas/arguments/character/character-filter-options.argument.schema";
+import CharacterCreationArgumentSchema from "../schemas/arguments/character/character-creation.argument.schema";
 
 @Resolver()
 export class CharacterResolver {
@@ -13,17 +14,24 @@ export class CharacterResolver {
     private readonly mapper: CharacterSchemaMapper,
   ) {}
 
-  @Query(() => [CharacterSchema])
+  @Query(returns => [CharacterSchema])
   characters(@Args('args', { nullable: true }) args?: CharacterFilterOptionsArgumentSchema) {
-    return this.useCase.findAll(args).then((entities) => {
-      return this.mapper.multipleToSchema(entities);
+    return this.useCase.findAll(args).then((domains) => {
+      return this.mapper.multipleToSchema(domains);
     });
   }
 
-  @Query(() => CharacterSchema)
+  @Query(returns => CharacterSchema)
   character(@Args('id') id: string) {
-    return this.useCase.findOne(new Uuid(id)).then((entity) => {
-      return this.mapper.toSchema(entity);
+    return this.useCase.findOne(new Uuid(id)).then((domain) => {
+      return this.mapper.toSchema(domain);
+    });
+  }
+
+  @Mutation(returns => CharacterSchema)
+  createCharacter(@Args('character') character: CharacterCreationArgumentSchema) {
+    return this.useCase.create(character).then((domain) => {
+      return this.mapper.toSchema(domain);
     });
   }
 }

@@ -5,7 +5,8 @@ import { Repository } from 'typeorm';
 import CharacterEntityMapper from '../../infrastructure/mappers/character-entity.mapper';
 import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
-import CharacterFilterOptionsArgument from "../arguments/character-filter-options.argument";
+import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
+import CharacterCreationArgument from "../arguments/character/CharacterCreationArgument";
 
 @Injectable()
 export class CharacterService {
@@ -31,5 +32,11 @@ export class CharacterService {
 
         return this.mapper.toDomain(entity);
       });
+  }
+
+  create(character: CharacterCreationArgument): Promise<Character> {
+    return this.characterRepository.save(character).then((entity) => {
+      return this.mapper.toDomain(entity);
+    });
   }
 }

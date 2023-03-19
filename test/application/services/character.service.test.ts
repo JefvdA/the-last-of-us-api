@@ -1,7 +1,7 @@
 import {Test} from "@nestjs/testing";
 import {CharacterService} from "../../../src/application/services/character.service";
 import CharacterEntityMapper from "../../../src/infrastructure/mappers/character-entity.mapper";
-import CharacterRepositoryMock from "../mocks/character.repository.mock";
+import CharacterRepositoryMock from "../../infrastructure/mocks/character.repository.mock";
 import {Repository} from "typeorm";
 import CharacterEntity from "../../../src/infrastructure/entities/character.entity";
 import {getRepositoryToken} from "@nestjs/typeorm";
@@ -27,7 +27,7 @@ describe(CharacterService.name, () => {
             const spy = jest.spyOn(repository, 'findBy');
 
             service.findAll().then(() => {
-                expect(spy).toBeCalled();
+                expect(repository.findBy).toBeCalled();
             });
         });
 
@@ -63,8 +63,30 @@ describe(CharacterService.name, () => {
             service.findOne('').catch((error) => {
                expect(error).toBeInstanceOf(NotFoundError)
             });
+        });
+    });
 
-            jest.restoreAllMocks();
+    describe('create', () => {
+        it('should call repository.save()', () => {
+            const spy = jest.spyOn(repository, 'save');
+
+            service.create({
+               firstName: 'John',
+               lastName: 'Doe'
+            });
+
+            expect(spy).toBeCalled();
+        });
+
+        it('should call mapper.toDomain()', () => {
+            const spy = jest.spyOn(mapper, 'toDomain');
+
+            service.create({
+                firstName: 'John',
+                lastName: 'Doe'
+            });
+
+            expect(spy).toBeCalled();
         });
     });
 });

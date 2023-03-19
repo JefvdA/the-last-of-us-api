@@ -6,6 +6,8 @@ import CharactersServiceMock from "../mocks/character.service.mock";
 import CharacterSchema from "../../../src/presentation/schemas/character.schema";
 import CharacterUseCaseMock from "../mocks/character.use-case.mock";
 import CharacterUseCase from "../../../src/application/use-cases/character.use-case";
+import CharacterCreationArgumentSchema
+    from "../../../src/presentation/schemas/arguments/character/character-creation.argument.schema";
 
 describe(CharacterResolver.name, () => {
     let resolver: CharacterResolver;
@@ -56,5 +58,29 @@ describe(CharacterResolver.name, () => {
              expect(spy).toBeCalled();
           });
        });
+    });
+
+    describe('createCharacter', () => {
+       it('should call useCase.create()', async () => {
+          const spy = jest.spyOn(useCase, 'create');
+
+          resolver.createCharacter({
+              firstName: 'John',
+              lastName: 'Doe'
+          });
+
+          expect(spy).toBeCalled();
+       });
+
+       it('should call mapper.toSchema()', async () => {
+           const spy = jest.spyOn(mapper, 'toSchema');
+
+           resolver.createCharacter({
+               firstName: 'John',
+               lastName: 'Doe'
+           });
+
+           expect(spy).toBeCalled();
+       })
     });
 });
