@@ -4,8 +4,9 @@ import Character from "../../domain/models/character";
 import Uuid from "../../domain/value-objects/uuid";
 import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
 import CharacterCreationArgument from "../arguments/character/character-creation.argument";
-import CharacterCreationDto from "../dtos/character-creation.dto";
-import CharacterUpdateArgumentSchema from "../../presentation/schemas/arguments/character/character-update.argument.schema";
+import CharacterCreationDto from "../dtos/character/character-creation.dto";
+import CharacterUpdateArgument from "../arguments/character/character-update.argument";
+import CharacterUpdateDto from "../dtos/character/character-update.dto";
 
 @Injectable()
 export default class CharacterUseCase {
@@ -25,7 +26,7 @@ export default class CharacterUseCase {
         return this.characterService.create(character);
     }
 
-    update(character: CharacterUpdateArgumentSchema) {
-
+    update(character: CharacterUpdateArgument): Promise<CharacterUpdateDto> {
+        return this.characterService.update(character)
     }
 }
