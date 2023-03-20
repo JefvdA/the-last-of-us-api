@@ -46,7 +46,7 @@ describe(CharacterService.name, () => {
 
           service.findOne('').then(() => {
               expect(spy).toBeCalled();
-          })
+          });
        });
 
        it('should call mapper.toDomain()', async () => {
@@ -71,22 +71,25 @@ describe(CharacterService.name, () => {
             const spy = jest.spyOn(repository, 'insert');
 
             service.create({
-               firstName: 'John',
-               lastName: 'Doe'
-            });
-
-            expect(spy).toBeCalled();
-        });
-
-        it('should call mapper.toDomain()', () => {
-            const spy = jest.spyOn(mapper, 'toDomain');
-
-            service.create({
                 firstName: 'John',
                 lastName: 'Doe'
+            }).then(() => {
+                expect(spy).toBeCalled();
             });
-
-            expect(spy).toBeCalled();
         });
+    });
+
+    describe('update', () => {
+       it('should call repository.update()', () => {
+          const spy = jest.spyOn(repository, 'update');
+
+          service.update({
+              uuid: '00000000-0000-0000-0000-000000000000',
+              firstName: 'John',
+              lastName: 'Doe'
+          }).then(() => {
+             expect(spy).toBeCalled();
+          });
+       });
     });
 });

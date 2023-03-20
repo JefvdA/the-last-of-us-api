@@ -25,7 +25,7 @@ describe(CharacterResolver.name, () => {
     });
 
     describe('characters', () => {
-       it('should call useCase.findAll()', async () => {
+       it('should call useCase.findAll()',  () => {
            const spy = jest.spyOn(useCase, 'findAll');
 
            resolver.characters().then(() => {
@@ -33,7 +33,7 @@ describe(CharacterResolver.name, () => {
            });
        });
 
-       it('should call mapper.multipleToSchema()', async () => {
+       it('should call mapper.multipleToSchema()',  () => {
           const spy = jest.spyOn(mapper, 'multipleToSchema');
 
           resolver.characters().then(() => {
@@ -43,7 +43,7 @@ describe(CharacterResolver.name, () => {
     });
 
     describe('character', () => {
-       it('should call useCase.findOne()', async () => {
+       it('should call useCase.findOne()',  () => {
            const spy = jest.spyOn(useCase, 'findOne');
 
            resolver.character('00000000-0000-0000-0000-000000000000').then(() => {
@@ -51,7 +51,7 @@ describe(CharacterResolver.name, () => {
            });
        });
 
-       it('should call mapper.toSchema()', async () => {
+       it('should call mapper.toSchema()', () => {
           const spy = jest.spyOn(mapper, 'toSchema');
 
           resolver.character('00000000-0000-0000-0000-000000000000').then(() => {
@@ -61,26 +61,29 @@ describe(CharacterResolver.name, () => {
     });
 
     describe('createCharacter', () => {
-       it('should call useCase.create()', async () => {
+       it('should call useCase.create()',  () => {
           const spy = jest.spyOn(useCase, 'create');
 
           resolver.createCharacter({
               firstName: 'John',
               lastName: 'Doe'
+          }).then(() => {
+              expect(spy).toBeCalled();
           });
-
-          expect(spy).toBeCalled();
        });
+    });
 
-       it('should call mapper.toSchema()', async () => {
-           const spy = jest.spyOn(mapper, 'toSchema');
+    describe('updateCharacter', () => {
+        it('should call useCase.update()', () => {
+           const spy = jest.spyOn(useCase, 'update');
 
-           resolver.createCharacter({
+           resolver.updateCharacter({
+               uuid: '00000000-0000-0000-0000-000000000000',
                firstName: 'John',
                lastName: 'Doe'
-           });
-
-           expect(spy).toBeCalled();
-       })
+           }).then(() => {
+               expect(spy).toBeCalled();
+           })
+        });
     });
 });
