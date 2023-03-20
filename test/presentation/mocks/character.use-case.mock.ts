@@ -5,8 +5,9 @@ import CharacterCreationArgument from "../../../src/application/arguments/charac
 import CharacterUpdateArgument from "../../../src/application/arguments/character/character-update.argument";
 import CharacterUpdateDto from "../../../src/application/dtos/character/character-update.dto";
 import CharacterCreationDto from "../../../src/application/dtos/character/character-creation.dto";
+import CrudUseCase from "../../../src/domain/interfaces/crud-use-case.interface";
 
-class CharacterUseCaseMock {
+class CharacterUseCaseMock implements CrudUseCase<Character>{
     findAll(): Promise<Character[]> {
         return Promise.resolve([
             new Character(
