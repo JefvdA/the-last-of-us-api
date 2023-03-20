@@ -1,6 +1,6 @@
 import {DeepPartial, FindManyOptions, FindOptionsWhere, InsertResult, Repository, UpdateResult} from "typeorm";
 import {getRepositoryToken} from "@nestjs/typeorm";
-import CharacterEntity from "../../../src/infrastructure/entities/character.entity";
+import CharacterEntity from "../../src/infrastructure/entities/character.entity";
 
 class CharacterRepositoryMock {
     findBy(): Promise<CharacterEntity[]> {

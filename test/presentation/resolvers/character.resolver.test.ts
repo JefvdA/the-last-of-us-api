@@ -2,9 +2,9 @@ import {CharacterResolver} from "../../../src/presentation/resolvers/character.r
 import {Test} from "@nestjs/testing";
 import {CharacterService} from "../../../src/application/services/character.service";
 import CharacterSchemaMapper from "../../../src/presentation/mappers/character-schema.mapper";
-import CharactersServiceMock from "../mocks/character.service.mock";
+import CharactersServiceMock from "../../mocks/character.service.mock";
 import CharacterSchema from "../../../src/presentation/schemas/character.schema";
-import CharacterUseCaseMock from "../mocks/character.use-case.mock";
+import CharacterUseCaseMock from "../../mocks/character.use-case.mock";
 import CharacterUseCase from "../../../src/application/use-cases/character.use-case";
 import CharacterCreationArgumentSchema
     from "../../../src/presentation/schemas/arguments/character/character-creation.argument.schema";
