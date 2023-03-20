@@ -11,6 +11,10 @@ type CharacterCreationResponseSchema {
   uuid: String!
 }
 
+type CharacterDeletionResponseSchema {
+  uuid: String!
+}
+
 input CharacterFilterOptionsArgumentSchema {
   firstName: String
   lastName: String
@@ -34,6 +38,7 @@ type CharacterUpdateResponseSchema {
 
 type Mutation {
   createCharacter(character: CharacterCreationArgumentSchema!): CharacterCreationResponseSchema!
+  deleteCharacter(id: String!): CharacterDeletionResponseSchema!
   updateCharacter(character: CharacterUpdateArgumentSchema!): CharacterUpdateResponseSchema!
 }
 
