@@ -1,3 +1,3 @@
 export default interface CharacterUpdateDto {
-    uuid: string;
+  uuid: string;
 }

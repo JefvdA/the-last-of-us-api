@@ -1,10 +1,10 @@
-import {Field, InputType} from "@nestjs/graphql";
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export default class CharacterCreationArgumentSchema {
-    @Field()
-    firstName!: string;
+  @Field()
+  firstName!: string;
 
-    @Field()
-    lastName!: string;
+  @Field()
+  lastName!: string;
 }

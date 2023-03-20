@@ -2,6 +2,6 @@ import { Module } from '@nestjs/common';
 import { ResponsesModule } from './responses/responses.module';
 
 @Module({
-  imports: [ResponsesModule]
+  imports: [ResponsesModule],
 })
 export class SchemasModule {}

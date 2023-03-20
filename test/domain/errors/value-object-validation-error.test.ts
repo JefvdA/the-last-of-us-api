@@ -14,7 +14,9 @@ describe('InvalidValueObjectError', () => {
       'propertyName',
       'propertyValue',
     );
-    expect(error.message).toBe('propertyValue is an invalid value for propertyName');
+    expect(error.message).toBe(
+      'propertyValue is an invalid value for propertyName',
+    );
   });
 
   it('should have the correct property name and error message', () => {

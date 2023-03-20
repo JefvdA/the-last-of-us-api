@@ -5,11 +5,7 @@ import Character from '../../domain/models/character';
 @Injectable()
 export default class CharacterEntityMapper {
   toDomain(entity: CharacterEntity): Character {
-    return new Character(
-      entity.uuid,
-      entity.firstName,
-      entity.lastName,
-    );
+    return new Character(entity.uuid, entity.firstName, entity.lastName);
   }
 
   multipleToDomain(entities: CharacterEntity[]): Character[] {
