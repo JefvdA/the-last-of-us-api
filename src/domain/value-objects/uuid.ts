@@ -4,7 +4,7 @@ export default class Uuid {
   readonly uuidRegex: RegExp =
     /^[a-f\d]{8}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}$/i;
 
-  constructor(readonly value: string) {
+  constructor(public value: string) {
     if (!this.isValidUuid(value))
       throw new ValueObjectValidationError('Uuid', value);
   }

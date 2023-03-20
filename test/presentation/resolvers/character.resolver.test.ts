@@ -88,4 +88,16 @@ describe(CharacterResolver.name, () => {
         });
     });
   });
+
+  describe('deleteCharacter', () => {
+    it('should call useCase.delete()', () => {
+      const spy = jest.spyOn(useCase, 'delete');
+
+      resolver
+        .deleteCharacter('00000000-0000-0000-0000-000000000000')
+        .then(() => {
+          expect(spy).toBeCalled();
+        });
+    });
+  });
 });

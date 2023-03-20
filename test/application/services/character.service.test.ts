@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import CharacterEntity from '../../../src/infrastructure/entities/character.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import NotFoundError from '../../../src/domain/errors/not-found-error';
+import Uuid from '../../../src/domain/value-objects/uuid';
 
 describe(CharacterService.name, () => {
   let service: CharacterService;
@@ -95,6 +96,18 @@ describe(CharacterService.name, () => {
           firstName: 'John',
           lastName: 'Doe',
         })
+        .then(() => {
+          expect(spy).toBeCalled();
+        });
+    });
+  });
+
+  describe('delete', () => {
+    it('should call repository.delete()', () => {
+      const spy = jest.spyOn(repository, 'delete');
+
+      service
+        .delete(new Uuid('00000000-0000-0000-0000-000000000000'))
         .then(() => {
           expect(spy).toBeCalled();
         });
