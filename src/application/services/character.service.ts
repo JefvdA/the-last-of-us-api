@@ -6,7 +6,7 @@ import CharacterEntityMapper from '../../infrastructure/mappers/character-entity
 import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
 import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
-import CharacterCreationArgument from "../arguments/character/CharacterCreationArgument";
+import CharacterCreationArgument from "../arguments/character/character-creation.argument";
 import CharacterCreationDto from "../dtos/character-creation.dto";
 
 @Injectable()

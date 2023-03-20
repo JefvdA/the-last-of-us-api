@@ -1,6 +1,6 @@
 import {CharacterService} from "../../../src/application/services/character.service";
 import Character from "../../../src/domain/models/character";
-import CharacterCreationArgument from "../../../src/application/arguments/character/CharacterCreationArgument";
+import CharacterCreationArgument from "../../../src/application/arguments/character/character-creation.argument";
 
 class CharacterServiceMock {
     findAll(): Promise<Character[]> {

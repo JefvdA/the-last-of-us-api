@@ -1,7 +1,7 @@
 import Character from "../../../src/domain/models/character";
 import Uuid from "../../../src/domain/value-objects/uuid";
 import CharacterUseCase from "../../../src/application/use-cases/character.use-case";
-import CharacterCreationArgument from "../../../src/application/arguments/character/CharacterCreationArgument";
+import CharacterCreationArgument from "../../../src/application/arguments/character/character-creation.argument";
 
 class CharacterUseCaseMock {
     findAll(): Promise<Character[]> {
