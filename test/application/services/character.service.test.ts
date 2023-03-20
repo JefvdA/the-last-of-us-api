@@ -31,7 +31,7 @@ describe(CharacterService.name, () => {
       const spy = jest.spyOn(repository, 'findBy');
 
       service.findAll().then(() => {
-        expect(repository.findBy).toBeCalled();
+        expect(spy).toBeCalled();
       });
     });
 

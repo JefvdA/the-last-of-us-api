@@ -1,5 +1,4 @@
 import CharacterSchemaMapper from '../../../src/presentation/mappers/character-schema.mapper';
-import CharacterEntity from '../../../src/infrastructure/entities/character.entity';
 import CharacterSchema from '../../../src/presentation/schemas/character.schema';
 import Character from '../../../src/domain/models/character';
 

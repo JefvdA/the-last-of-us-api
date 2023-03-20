@@ -4,8 +4,6 @@ import NotFoundError from '../../../src/domain/errors/not-found-error';
 import ValueObjectValidationError from '../../../src/domain/errors/value-object-validation-error';
 import { QueryFailedError } from 'typeorm';
 
-const mockHost: any = {};
-
 describe(GraphqlExceptionFilterMiddleware.name, () => {
   let exceptionFilter: GraphqlExceptionFilterMiddleware;
 
@@ -16,16 +14,13 @@ describe(GraphqlExceptionFilterMiddleware.name, () => {
   describe('catch', () => {
     it('should return the same message as the original exception', () => {
       const originalMessage = 'This is the original message!';
-      const apolloError = exceptionFilter.catch(
-        new Error(originalMessage),
-        mockHost,
-      );
+      const apolloError = exceptionFilter.catch(new Error(originalMessage));
 
       expect(apolloError.message).toBe(originalMessage);
     });
 
     it('should return INTERNAL_SERVER_ERROR by default', () => {
-      const apolloError = exceptionFilter.catch(new Error(), mockHost);
+      const apolloError = exceptionFilter.catch(new Error());
       const extensions = apolloError.extensions;
 
       expect(extensions.statusCode).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -35,10 +30,7 @@ describe(GraphqlExceptionFilterMiddleware.name, () => {
     });
 
     it('should return NOT_FOUND if a NotFoundError is caught', () => {
-      const apolloError = exceptionFilter.catch(
-        new NotFoundError(''),
-        mockHost,
-      );
+      const apolloError = exceptionFilter.catch(new NotFoundError(''));
       const extensions = apolloError.extensions;
 
       expect(extensions.statusCode).toBe(HttpStatus.NOT_FOUND);
@@ -48,7 +40,6 @@ describe(GraphqlExceptionFilterMiddleware.name, () => {
     it('should return BAD_REQUEST if a ValueObjectValidationError is caught', () => {
       const apolloError = exceptionFilter.catch(
         new ValueObjectValidationError('', ''),
-        mockHost,
       );
       const extensions = apolloError.extensions;
 
@@ -59,7 +50,6 @@ describe(GraphqlExceptionFilterMiddleware.name, () => {
     it('should return CONFLICT if a QueryFailedError is caught', () => {
       const apolloError = exceptionFilter.catch(
         new QueryFailedError('', [], ''),
-        mockHost,
       );
       const extensions = apolloError.extensions;
 

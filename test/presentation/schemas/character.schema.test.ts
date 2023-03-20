@@ -1,5 +1,4 @@
 import CharacterSchema from '../../../src/presentation/schemas/character.schema';
-import CharacterEntity from '../../../src/infrastructure/entities/character.entity';
 
 describe(CharacterSchema.name, () => {
   describe('constructor', () => {

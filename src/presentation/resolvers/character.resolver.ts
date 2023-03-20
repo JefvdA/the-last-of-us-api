@@ -17,7 +17,7 @@ export class CharacterResolver {
     private readonly mapper: CharacterSchemaMapper,
   ) {}
 
-  @Query((returns) => [CharacterSchema])
+  @Query(() => [CharacterSchema])
   characters(
     @Args('args', { nullable: true })
     args?: CharacterFilterOptionsArgumentSchema,
@@ -27,21 +27,21 @@ export class CharacterResolver {
     });
   }
 
-  @Query((returns) => CharacterSchema)
+  @Query(() => CharacterSchema)
   character(@Args('id') id: string) {
     return this.useCase.findOne(new Uuid(id)).then((domain) => {
       return this.mapper.toSchema(domain);
     });
   }
 
-  @Mutation((returns) => CharacterCreationResponseSchema)
+  @Mutation(() => CharacterCreationResponseSchema)
   createCharacter(
     @Args('character') character: CharacterCreationArgumentSchema,
   ) {
     return this.useCase.create(character);
   }
 
-  @Mutation((returns) => CharacterUpdateResponseSchema)
+  @Mutation(() => CharacterUpdateResponseSchema)
   updateCharacter(@Args('character') character: CharacterUpdateArgumentSchema) {
     return this.useCase.update(character);
   }
