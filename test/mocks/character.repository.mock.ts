@@ -1,4 +1,4 @@
-import { InsertResult, UpdateResult } from 'typeorm';
+import {DeleteResult, InsertResult, UpdateResult} from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import CharacterEntity from '../../src/infrastructure/entities/character.entity';
 
@@ -32,6 +32,12 @@ class CharacterRepositoryMock {
 
   update(): Promise<UpdateResult> {
     const result = new UpdateResult();
+
+    return Promise.resolve(result);
+  }
+
+  delete(): Promise<DeleteResult> {
+    const result = new DeleteResult();
 
     return Promise.resolve(result);
   }

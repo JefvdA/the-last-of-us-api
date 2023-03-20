@@ -51,9 +51,9 @@ describe(CharacterUseCase.name, () => {
       useCase.create({
         firstName: 'John',
         lastName: 'Doe',
+      }).then(() => {
+        expect(spy).toBeCalled();
       });
-
-      expect(spy).toBeCalled();
     });
   });
 
@@ -65,9 +65,19 @@ describe(CharacterUseCase.name, () => {
         uuid: '00000000-0000-0000-0000-000000000000',
         firstName: 'John',
         lastName: 'Doe',
+      }).then(() => {
+        expect(spy).toBeCalled();
       });
+    });
+  });
 
-      expect(spy).toBeCalled();
+  describe('delete', () => {
+    it('should call service.delete()', () => {
+      const spy = jest.spyOn(service, 'delete');
+
+      useCase.delete(new Uuid('00000000-0000-0000-0000-000000000000')).then(() => {
+        expect(spy).toBeCalled();
+      });
     });
   });
 });
