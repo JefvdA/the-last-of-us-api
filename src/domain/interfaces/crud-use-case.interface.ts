@@ -8,4 +8,6 @@ export default interface CrudUseCase<T> {
   create(creationArgument: any): Promise<any>;
 
   update(updateArgument: any): Promise<any>;
+
+  delete(uuid: Uuid): Promise<any>;
 }
