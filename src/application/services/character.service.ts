@@ -10,9 +10,10 @@ import CharacterCreationArgument from "../arguments/character/character-creation
 import CharacterCreationDto from "../dtos/character/character-creation.dto";
 import CharacterUpdateArgument from "../arguments/character/character-update.argument";
 import CharacterUpdateDto from "../dtos/character/character-update.dto";
+import Service from "../../domain/interfaces/service.interface";
 
 @Injectable()
-export class CharacterService {
+export class CharacterService implements Service<Character> {
   constructor(
     @InjectRepository(CharacterEntity)
     private readonly characterRepository: Repository<CharacterEntity>,

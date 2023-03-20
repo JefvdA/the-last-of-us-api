@@ -4,8 +4,9 @@ import CharacterCreationArgument from "../../../src/application/arguments/charac
 import CharacterCreationDto from "../../../src/application/dtos/character/character-creation.dto";
 import CharacterUpdateArgument from "../../../src/application/arguments/character/character-update.argument";
 import CharacterUpdateDto from "../../../src/application/dtos/character/character-update.dto";
+import Service from "../../../src/domain/interfaces/service.interface";
 
-class CharacterServiceMock {
+class CharacterServiceMock implements Service<Character> {
     findAll(): Promise<Character[]> {
         return Promise.resolve([
             new Character(
