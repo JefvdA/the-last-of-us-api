@@ -38,11 +38,25 @@ describe(CharacterUseCase.name, () => {
       });
    });
 
-   describe('createCharacter', () => {
-      it('should call service.create', () => {
+   describe('create', () => {
+      it('should call service.create()', () => {
          const spy = jest.spyOn(service, 'create');
 
          useCase.create({
+            firstName: 'John',
+            lastName: 'Doe'
+         });
+
+         expect(spy).toBeCalled();
+      });
+   });
+
+   describe('update', () => {
+      it('should call service.update()', () => {
+         const spy = jest.spyOn(service, 'update');
+
+         useCase.update({
+            uuid: '00000000-0000-0000-0000-000000000000',
             firstName: 'John',
             lastName: 'Doe'
          });

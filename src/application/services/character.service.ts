@@ -6,8 +6,10 @@ import CharacterEntityMapper from '../../infrastructure/mappers/character-entity
 import Character from '../../domain/models/character';
 import NotFoundError from "../../domain/errors/not-found-error";
 import CharacterFilterOptionsArgument from "../arguments/character/character-filter-options.argument";
-import CharacterCreationArgument from "../arguments/character/CharacterCreationArgument";
-import CharacterCreationDto from "../dtos/character-creation.dto";
+import CharacterCreationArgument from "../arguments/character/character-creation.argument";
+import CharacterCreationDto from "../dtos/character/character-creation.dto";
+import CharacterUpdateArgument from "../arguments/character/character-update.argument";
+import CharacterUpdateDto from "../dtos/character/character-update.dto";
 
 @Injectable()
 export class CharacterService {
@@ -41,5 +43,13 @@ export class CharacterService {
         uuid: result.identifiers[0].uuid
       }
     });
+  }
+
+  update(character: CharacterUpdateArgument): Promise<CharacterUpdateDto> {
+      return this.characterRepository.update({ uuid: character.uuid } , character).then(() => {
+        return {
+          uuid: character.uuid
+        }
+      });
   }
 }

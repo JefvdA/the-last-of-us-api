@@ -1,4 +1,4 @@
-import {DeepPartial, FindManyOptions, FindOptionsWhere, InsertResult, Repository} from "typeorm";
+import {DeepPartial, FindManyOptions, FindOptionsWhere, InsertResult, Repository, UpdateResult} from "typeorm";
 import {getRepositoryToken} from "@nestjs/typeorm";
 import CharacterEntity from "../../../src/infrastructure/entities/character.entity";
 
@@ -26,6 +26,12 @@ class CharacterRepositoryMock {
         result.identifiers.push({
             uuid: '00000000-0000-0000-0000-000000000000'
         });
+
+        return Promise.resolve(result);
+    }
+
+    update(): Promise<UpdateResult> {
+        const result = new UpdateResult();
 
         return Promise.resolve(result);
     }

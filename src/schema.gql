@@ -22,8 +22,19 @@ type CharacterSchema {
   lastName: String
 }
 
+input CharacterUpdateArgumentSchema {
+  firstName: String!
+  lastName: String!
+  uuid: String!
+}
+
+type CharacterUpdateResponseSchema {
+  uuid: String!
+}
+
 type Mutation {
   createCharacter(character: CharacterCreationArgumentSchema!): CharacterCreationResponseSchema!
+  updateCharacter(character: CharacterUpdateArgumentSchema!): CharacterUpdateResponseSchema!
 }
 
 type Query {

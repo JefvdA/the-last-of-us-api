@@ -7,6 +7,8 @@ import Uuid from "../../domain/value-objects/uuid";
 import CharacterFilterOptionsArgumentSchema from "../schemas/arguments/character/character-filter-options.argument.schema";
 import CharacterCreationArgumentSchema from "../schemas/arguments/character/character-creation.argument.schema";
 import CharacterCreationResponseSchema from "../schemas/responses/character/character-creation.response.schema";
+import CharacterUpdateResponseSchema from "../schemas/responses/character/character-update.response.schema";
+import CharacterUpdateArgumentSchema from "../schemas/arguments/character/character-update.argument.schema";
 
 @Resolver()
 export class CharacterResolver {
@@ -32,5 +34,10 @@ export class CharacterResolver {
   @Mutation(returns => CharacterCreationResponseSchema)
   createCharacter(@Args('character') character: CharacterCreationArgumentSchema) {
     return this.useCase.create(character);
+  }
+
+  @Mutation(returns => CharacterUpdateResponseSchema)
+  updateCharacter(@Args('character') character: CharacterUpdateArgumentSchema) {
+    return this.useCase.update(character);
   }
 }
