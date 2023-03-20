@@ -1,4 +1,4 @@
-export default interface Service<T> {
+export default interface CrudService<T> {
     findAll(filterOptions?: any): Promise<T[]>;
 
     findOne(uuid: string): Promise<T>;
