@@ -3,7 +3,7 @@ import CharacterUseCase from '../../src/application/use-cases/character.use-case
 import CharacterUpdateDto from '../../src/application/dtos/character/character-update.dto';
 import CharacterCreationDto from '../../src/application/dtos/character/character-creation.dto';
 import CrudUseCase from '../../src/domain/interfaces/crud-use-case.interface';
-import CharacterDeletionDto from "../../src/application/dtos/character/character-deletion.dto";
+import CharacterDeletionDto from '../../src/application/dtos/character/character-deletion.dto';
 
 class CharacterUseCaseMock implements CrudUseCase<Character> {
   findAll(): Promise<Character[]> {

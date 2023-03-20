@@ -1,4 +1,4 @@
-import {DeleteResult, InsertResult, UpdateResult} from 'typeorm';
+import { DeleteResult, InsertResult, UpdateResult } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import CharacterEntity from '../../src/infrastructure/entities/character.entity';
 

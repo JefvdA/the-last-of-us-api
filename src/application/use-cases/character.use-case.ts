@@ -8,7 +8,7 @@ import CharacterCreationDto from '../dtos/character/character-creation.dto';
 import CharacterUpdateArgument from '../arguments/character/character-update.argument';
 import CharacterUpdateDto from '../dtos/character/character-update.dto';
 import CrudUseCase from '../../domain/interfaces/crud-use-case.interface';
-import CharacterDeletionDto from "../dtos/character/character-deletion.dto";
+import CharacterDeletionDto from '../dtos/character/character-deletion.dto';
 
 @Injectable()
 export default class CharacterUseCase implements CrudUseCase<Character> {

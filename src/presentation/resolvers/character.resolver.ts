@@ -9,7 +9,7 @@ import CharacterCreationArgumentSchema from '../schemas/arguments/character/char
 import CharacterCreationResponseSchema from '../schemas/responses/character/character-creation.response.schema';
 import CharacterUpdateResponseSchema from '../schemas/responses/character/character-update.response.schema';
 import CharacterUpdateArgumentSchema from '../schemas/arguments/character/character-update.argument.schema';
-import CharacterDeletionResponseSchema from "../schemas/responses/character/character-deletion.response.schema";
+import CharacterDeletionResponseSchema from '../schemas/responses/character/character-deletion.response.schema';
 
 @Resolver()
 export class CharacterResolver {

@@ -3,7 +3,7 @@ import Character from '../../src/domain/models/character';
 import CharacterCreationDto from '../../src/application/dtos/character/character-creation.dto';
 import CharacterUpdateDto from '../../src/application/dtos/character/character-update.dto';
 import CrudService from '../../src/domain/interfaces/crud-service.interface';
-import CharacterDeletionDto from "../../src/application/dtos/character/character-deletion.dto";
+import CharacterDeletionDto from '../../src/application/dtos/character/character-deletion.dto';
 
 class CharacterServiceMock implements CrudService<Character> {
   findAll(): Promise<Character[]> {

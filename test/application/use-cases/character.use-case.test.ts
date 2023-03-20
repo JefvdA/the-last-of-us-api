@@ -48,12 +48,14 @@ describe(CharacterUseCase.name, () => {
     it('should call service.create()', () => {
       const spy = jest.spyOn(service, 'create');
 
-      useCase.create({
-        firstName: 'John',
-        lastName: 'Doe',
-      }).then(() => {
-        expect(spy).toBeCalled();
-      });
+      useCase
+        .create({
+          firstName: 'John',
+          lastName: 'Doe',
+        })
+        .then(() => {
+          expect(spy).toBeCalled();
+        });
     });
   });
 
@@ -61,13 +63,15 @@ describe(CharacterUseCase.name, () => {
     it('should call service.update()', () => {
       const spy = jest.spyOn(service, 'update');
 
-      useCase.update({
-        uuid: '00000000-0000-0000-0000-000000000000',
-        firstName: 'John',
-        lastName: 'Doe',
-      }).then(() => {
-        expect(spy).toBeCalled();
-      });
+      useCase
+        .update({
+          uuid: '00000000-0000-0000-0000-000000000000',
+          firstName: 'John',
+          lastName: 'Doe',
+        })
+        .then(() => {
+          expect(spy).toBeCalled();
+        });
     });
   });
 
@@ -75,9 +79,11 @@ describe(CharacterUseCase.name, () => {
     it('should call service.delete()', () => {
       const spy = jest.spyOn(service, 'delete');
 
-      useCase.delete(new Uuid('00000000-0000-0000-0000-000000000000')).then(() => {
-        expect(spy).toBeCalled();
-      });
+      useCase
+        .delete(new Uuid('00000000-0000-0000-0000-000000000000'))
+        .then(() => {
+          expect(spy).toBeCalled();
+        });
     });
   });
 });
