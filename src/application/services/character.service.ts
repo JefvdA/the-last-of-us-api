@@ -11,6 +11,8 @@ import CharacterCreationDto from '../dtos/character/character-creation.dto';
 import CharacterUpdateArgument from '../arguments/character/character-update.argument';
 import CharacterUpdateDto from '../dtos/character/character-update.dto';
 import CrudService from '../../domain/interfaces/crud-service.interface';
+import Uuid from "../../domain/value-objects/uuid";
+import CharacterDeletionDto from "../dtos/character/character-deletion.dto";
 
 @Injectable()
 export class CharacterService implements CrudService<Character> {
@@ -58,5 +60,13 @@ export class CharacterService implements CrudService<Character> {
           uuid: character.uuid,
         };
       });
+  }
+
+  delete(uuid: Uuid): Promise<CharacterDeletionDto> {
+    return this.characterRepository.delete({ uuid: uuid.value }).then(() => {
+      return {
+        uuid: uuid.value
+      }
+    });
   }
 }
