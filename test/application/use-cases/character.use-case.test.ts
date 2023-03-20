@@ -3,7 +3,7 @@ import {CharacterService} from "../../../src/application/services/character.serv
 import {Test} from "@nestjs/testing";
 import CharacterEntityMapper from "../../../src/infrastructure/mappers/character-entity.mapper";
 import Uuid from "../../../src/domain/value-objects/uuid";
-import CharacterServiceMock from "../../presentation/mocks/character.service.mock";
+import CharacterServiceMock from "../../mocks/character.service.mock";
 
 describe(CharacterUseCase.name, () => {
    let useCase: CharacterUseCase;

@@ -7,9 +7,10 @@ import CharacterCreationArgument from "../arguments/character/character-creation
 import CharacterCreationDto from "../dtos/character/character-creation.dto";
 import CharacterUpdateArgument from "../arguments/character/character-update.argument";
 import CharacterUpdateDto from "../dtos/character/character-update.dto";
+import CrudUseCase from "../../domain/interfaces/crud-use-case.interface";
 
 @Injectable()
-export default class CharacterUseCase {
+export default class CharacterUseCase implements CrudUseCase<Character>{
     constructor(
         private readonly characterService: CharacterService
     ) {}
