@@ -13,9 +13,4 @@ jobs:
         with:
           node-version: "18.15"
       - run: npm ci
-      - run: npm run format
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Apply formatting changes
-          branch: ${{ github.head_ref }}
+      - run: npm run format:check
