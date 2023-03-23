@@ -1,7 +1,7 @@
 import CharacterResolver from '../../../src/presentation/resolvers/character.resolver';
 import { Test } from '@nestjs/testing';
 import CharacterSchemaMapper from '../../../src/presentation/mappers/character-schema.mapper';
-import CharacterUseCaseMock from '../../mocks/character.use-case.mock';
+import CharacterUseCaseMock from '../../fakes/character.use-case.fake';
 import CharacterUseCase from '../../../src/application/use-cases/character.use-case';
 describe(CharacterResolver.name, () => {
   let resolver: CharacterResolver;

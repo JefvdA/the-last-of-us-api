@@ -2,7 +2,7 @@ import { DeleteResult, InsertResult, UpdateResult } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import CharacterEntity from '../../src/infrastructure/entities/character.entity';
 
-class CharacterRepositoryMock {
+class CharacterRepositoryFake {
   findBy(): Promise<CharacterEntity[]> {
     return Promise.resolve([
       {
@@ -44,5 +44,5 @@ class CharacterRepositoryMock {
 }
 export default {
   provide: getRepositoryToken(CharacterEntity),
-  useClass: CharacterRepositoryMock,
+  useClass: CharacterRepositoryFake,
 };

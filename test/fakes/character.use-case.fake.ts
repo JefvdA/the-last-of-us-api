@@ -5,7 +5,7 @@ import CharacterCreationDto from '../../src/application/dtos/character/character
 import CrudUseCase from '../../src/domain/interfaces/crud-use-case.interface';
 import CharacterDeletionDto from '../../src/application/dtos/character/character-deletion.dto';
 
-class CharacterUseCaseMock implements CrudUseCase<Character> {
+class CharacterUseCaseFake implements CrudUseCase<Character> {
   findAll(): Promise<Character[]> {
     return Promise.resolve([
       new Character('00000000-0000-0000-0000-000000000000', 'John', 'Doe'),
@@ -38,5 +38,5 @@ class CharacterUseCaseMock implements CrudUseCase<Character> {
 }
 export default {
   provide: CharacterUseCase,
-  useClass: CharacterUseCaseMock,
+  useClass: CharacterUseCaseFake,
 };

@@ -5,7 +5,7 @@ import CharacterUpdateDto from '../../src/application/dtos/character/character-u
 import CrudService from '../../src/domain/interfaces/crud-service.interface';
 import CharacterDeletionDto from '../../src/application/dtos/character/character-deletion.dto';
 
-class CharacterServiceMock implements CrudService<Character> {
+class CharacterServiceFake implements CrudService<Character> {
   findAll(): Promise<Character[]> {
     return Promise.resolve([
       new Character('00000000-0000-0000-0000-000000000000', 'John', 'Doe'),
@@ -38,5 +38,5 @@ class CharacterServiceMock implements CrudService<Character> {
 }
 export default {
   provide: CharacterService,
-  useClass: CharacterServiceMock,
+  useClass: CharacterServiceFake,
 };

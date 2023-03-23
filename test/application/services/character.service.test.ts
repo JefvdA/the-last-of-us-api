@@ -1,13 +1,13 @@
 import { Test } from '@nestjs/testing';
 import CharacterService from '../../../src/application/services/character.service';
 import CharacterEntityMapper from '../../../src/infrastructure/mappers/character-entity.mapper';
-import CharacterRepositoryMock from '../../mocks/character.repository.mock';
+import CharacterRepositoryMock from '../../fakes/character.repository.fake';
 import { Repository } from 'typeorm';
 import CharacterEntity from '../../../src/infrastructure/entities/character.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import NotFoundError from '../../../src/domain/errors/not-found-error';
 import Uuid from '../../../src/domain/value-objects/uuid';
-import mockedValueObjects from '../../mocks/value-objects.mock';
+import mockedValueObjects from '../../fakes/value-objects.fake';
 
 describe(CharacterService.name, () => {
   let service: CharacterService;
