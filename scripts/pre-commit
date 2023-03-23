@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Starting up docker container"
+docker-compose run --rm node-dev sh -c '
+	set -e
+
+	printf "Running linter"
+	npm run lint
+
+	printf "Running formatter"
+	npm run format
+'
+git add .
