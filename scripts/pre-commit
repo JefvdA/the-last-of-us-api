@@ -5,10 +5,10 @@ echo "Starting up docker container"
 docker-compose run --rm node-dev sh -c '
 	set -e
 
-	printf "Running linter"
+	printf "\033[0;34mRunning linter\033[0m\n"
 	npm run lint
 
-	printf "Running formatter"
+	printf "\033[0;34mRunning formatter\033[0m\n"
 	npm run format
 '
 git add .

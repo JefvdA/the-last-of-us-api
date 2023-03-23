@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Starting up docker container"
+docker-compose run --rm node-dev sh -c '
+	set -e
+
+	printf "\033[0;34mRunning tests\033[0m\n"
+	npm run test
+'
