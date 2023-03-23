@@ -7,6 +7,7 @@ import CharacterEntity from '../../../src/infrastructure/entities/character.enti
 import { getRepositoryToken } from '@nestjs/typeorm';
 import NotFoundError from '../../../src/domain/errors/not-found-error';
 import Uuid from '../../../src/domain/value-objects/uuid';
+import mockedValueObjects from '../../mocks/value-objects.mock';
 
 describe(CharacterService.name, () => {
   let service: CharacterService;
@@ -49,7 +50,7 @@ describe(CharacterService.name, () => {
     it('should call repository.findOneBy()', async () => {
       const spy = jest.spyOn(repository, 'findOneBy');
 
-      service.findOne('').then(() => {
+      service.findOne(mockedValueObjects.Uuid).then(() => {
         expect(spy).toBeCalled();
       });
     });
@@ -57,7 +58,7 @@ describe(CharacterService.name, () => {
     it('should call mapper.toDomain()', async () => {
       const spy = jest.spyOn(mapper, 'toDomain');
 
-      service.findOne('').then(() => {
+      service.findOne(mockedValueObjects.Uuid).then(() => {
         expect(spy).toBeCalled();
       });
     });
@@ -65,7 +66,7 @@ describe(CharacterService.name, () => {
     it('should throw a NotFoundError if there was no character found', async () => {
       jest.spyOn(repository, 'findOneBy').mockResolvedValueOnce(null);
 
-      service.findOne('').catch((error) => {
+      service.findOne(mockedValueObjects.Uuid).catch((error) => {
         expect(error).toBeInstanceOf(NotFoundError);
       });
     });

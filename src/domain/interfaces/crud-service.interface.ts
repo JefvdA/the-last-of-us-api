@@ -3,7 +3,7 @@ import Uuid from '../value-objects/uuid';
 export default interface CrudService<T> {
   findAll(filterOptions?: any): Promise<T[]>;
 
-  findOne(uuid: string): Promise<T>;
+  findOne(uuid: Uuid): Promise<T>;
 
   create(creationArgument: any): Promise<any>;
 

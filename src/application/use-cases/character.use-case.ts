@@ -21,7 +21,7 @@ export default class CharacterUseCase implements CrudUseCase<Character> {
   }
 
   findOne(uuid: Uuid): Promise<Character> {
-    return this.characterService.findOne(uuid.value);
+    return this.characterService.findOne(uuid);
   }
 
   create(character: CharacterCreationArgument): Promise<CharacterCreationDto> {

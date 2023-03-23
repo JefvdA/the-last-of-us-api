@@ -32,9 +32,9 @@ export class CharacterService implements CrudService<Character> {
       });
   }
 
-  findOne(uuid: string): Promise<Character> {
+  findOne(uuid: Uuid): Promise<Character> {
     return this.characterRepository
-      .findOneBy({ uuid: uuid })
+      .findOneBy({ uuid: uuid.value })
       .then((entity): Character => {
         if (entity === null) {
           throw new NotFoundError(Character.name);
