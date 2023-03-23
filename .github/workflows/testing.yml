@@ -1,10 +1,10 @@
-name: Testing
+name: Tester
 on:
   pull_request:
   push:
     branches: [main]
 jobs:
-  format:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

@@ -1,10 +1,10 @@
-name: Linting
+name: Linter
 on:
   pull_request:
   push:
     branches: [main]
 jobs:
-  format:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
