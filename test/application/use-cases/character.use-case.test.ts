@@ -1,5 +1,5 @@
 import CharacterUseCase from '../../../src/application/use-cases/character.use-case';
-import { CharacterService } from '../../../src/application/services/character.service';
+import CharacterService from '../../../src/application/services/character.service';
 import { Test } from '@nestjs/testing';
 import CharacterEntityMapper from '../../../src/infrastructure/mappers/character-entity.mapper';
 import Uuid from '../../../src/domain/value-objects/uuid';

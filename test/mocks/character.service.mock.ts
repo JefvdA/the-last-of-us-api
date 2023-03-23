@@ -1,4 +1,4 @@
-import { CharacterService } from '../../src/application/services/character.service';
+import CharacterService from '../../src/application/services/character.service';
 import Character from '../../src/domain/models/character';
 import CharacterCreationDto from '../../src/application/dtos/character/character-creation.dto';
 import CharacterUpdateDto from '../../src/application/dtos/character/character-update.dto';

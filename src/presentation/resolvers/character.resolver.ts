@@ -12,7 +12,7 @@ import CharacterUpdateArgumentSchema from '../schemas/arguments/character/charac
 import CharacterDeletionResponseSchema from '../schemas/responses/character/character-deletion.response.schema';
 
 @Resolver()
-export class CharacterResolver {
+export default class CharacterResolver {
   constructor(
     private readonly useCase: CharacterUseCase,
     private readonly mapper: CharacterSchemaMapper,

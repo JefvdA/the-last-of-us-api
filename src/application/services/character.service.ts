@@ -15,7 +15,7 @@ import Uuid from '../../domain/value-objects/uuid';
 import CharacterDeletionDto from '../dtos/character/character-deletion.dto';
 
 @Injectable()
-export class CharacterService implements CrudService<Character> {
+export default class CharacterService implements CrudService<Character> {
   constructor(
     @InjectRepository(CharacterEntity)
     private readonly characterRepository: Repository<CharacterEntity>,

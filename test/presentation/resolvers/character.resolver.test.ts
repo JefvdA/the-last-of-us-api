@@ -1,4 +1,4 @@
-import { CharacterResolver } from '../../../src/presentation/resolvers/character.resolver';
+import CharacterResolver from '../../../src/presentation/resolvers/character.resolver';
 import { Test } from '@nestjs/testing';
 import CharacterSchemaMapper from '../../../src/presentation/mappers/character-schema.mapper';
 import CharacterUseCaseMock from '../../mocks/character.use-case.mock';

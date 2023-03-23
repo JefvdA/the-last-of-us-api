@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CharacterService } from '../services/character.service';
+import CharacterService from '../services/character.service';
 import Character from '../../domain/models/character';
 import Uuid from '../../domain/value-objects/uuid';
 import CharacterFilterOptionsArgument from '../arguments/character/character-filter-options.argument';

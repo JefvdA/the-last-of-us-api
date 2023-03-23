@@ -6,4 +6,4 @@ const mappers: Array<any> = [CharacterEntityMapper];
   providers: mappers,
   exports: mappers,
 })
-export class MappersModule {}
+export default class MappersModule {}

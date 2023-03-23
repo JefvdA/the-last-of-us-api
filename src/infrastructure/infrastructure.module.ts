@@ -3,8 +3,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EntitiesModule } from './entities/entities.module';
-import { MappersModule } from './mappers/mappers.module';
+import EntitiesModule from './entities/entities.module';
+import MappersModule from './mappers/mappers.module';
 
 @Module({
   imports: [
@@ -28,4 +28,4 @@ import { MappersModule } from './mappers/mappers.module';
     MappersModule,
   ],
 })
-export class InfrastructureModule {}
+export default class InfrastructureModule {}

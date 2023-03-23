@@ -6,4 +6,4 @@ import CharacterEntity from './character.entity';
   imports: [TypeOrmModule.forFeature([CharacterEntity])],
   exports: [TypeOrmModule],
 })
-export class EntitiesModule {}
+export default class EntitiesModule {}
