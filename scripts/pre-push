@@ -5,6 +5,6 @@ echo "Starting up docker container"
 docker-compose run --rm node-dev sh -c '
 	set -e
 
-	printf "\033[0;34mRunning tests\033[0m\n"
+	printf "\033[34;1mRunning tests\033[0m\n"
 	npm run test
 '
