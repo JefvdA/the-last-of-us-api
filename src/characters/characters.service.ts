@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import NotFoundError from '../domain/errors/not-found-error';
 import { FilterCharactersInput } from './dto/filter-characters.input';
 import { UpdateCharacterOutput } from './dto/update-character.output';
+import { DeleteCharacterOutput } from './dto/delete-character.output';
 
 @Injectable()
 export class CharactersService {
@@ -35,13 +36,15 @@ export class CharactersService {
       });
   }
 
-  async update(uuid: string, updateCharacterInput: UpdateCharacterInput) {
+  update(uuid: string, updateCharacterInput: UpdateCharacterInput) {
     return this.characterRepo
       .update({ uuid: uuid }, updateCharacterInput)
       .then(() => new UpdateCharacterOutput(uuid));
   }
 
   remove(uuid: string) {
-    return `This action removes a #${uuid} character`;
+    return this.characterRepo
+      .delete({ uuid: uuid })
+      .then(() => new DeleteCharacterOutput(uuid));
   }
 }

@@ -13,6 +13,10 @@ input CreateCharacterInput {
   lastName: String!
 }
 
+type DeleteCharacterOutput {
+  uuid: String!
+}
+
 input FilterCharactersInput {
   firstName: String
   lastName: String
@@ -20,7 +24,7 @@ input FilterCharactersInput {
 
 type Mutation {
   createCharacter(createCharacterInput: CreateCharacterInput!): Character!
-  removeCharacter(uuid: String!): Character!
+  removeCharacter(uuid: String!): DeleteCharacterOutput!
   updateCharacter(updateCharacterInput: UpdateCharacterInput!): UpdateCharacterOutput!
 }
 

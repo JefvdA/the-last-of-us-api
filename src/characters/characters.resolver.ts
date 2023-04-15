@@ -5,6 +5,7 @@ import { CreateCharacterInput } from './dto/create-character.input';
 import { UpdateCharacterInput } from './dto/update-character.input';
 import { FilterCharactersInput } from './dto/filter-characters.input';
 import { UpdateCharacterOutput } from './dto/update-character.output';
+import { DeleteCharacterOutput } from './dto/delete-character.output';
 
 @Resolver(() => Character)
 export class CharactersResolver {
@@ -40,7 +41,7 @@ export class CharactersResolver {
     );
   }
 
-  @Mutation(() => Character)
+  @Mutation(() => DeleteCharacterOutput)
   removeCharacter(@Args('uuid') uuid: string) {
     return this.charactersService.remove(uuid);
   }
