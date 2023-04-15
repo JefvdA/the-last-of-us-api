@@ -1,4 +1,4 @@
-import ValueObjectValidationError from '../../../src/domain/errors/value-object-validation-error';
+import ValueObjectValidationError from './value-object-validation-error';
 
 describe('InvalidValueObjectError', () => {
   it('should have the correct name', () => {

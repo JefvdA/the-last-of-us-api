@@ -1,5 +1,5 @@
-import Uuid from '../../../src/domain/value-objects/uuid';
-import ValueObjectValidationError from '../../../src/domain/errors/value-object-validation-error';
+import Uuid from './uuid';
+import ValueObjectValidationError from '../errors/value-object-validation-error';
 
 describe('Uuid', () => {
   describe('constructor', () => {

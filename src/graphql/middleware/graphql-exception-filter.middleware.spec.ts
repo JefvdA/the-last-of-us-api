@@ -1,7 +1,7 @@
-import GraphqlExceptionFilterMiddleware from '../../../src/graphql/middleware/graphql-exception-filter.middleware';
+import GraphqlExceptionFilterMiddleware from './graphql-exception-filter.middleware';
 import { HttpStatus } from '@nestjs/common';
-import NotFoundError from '../../../src/domain/errors/not-found-error';
-import ValueObjectValidationError from '../../../src/domain/errors/value-object-validation-error';
+import NotFoundError from '../../domain/errors/not-found-error';
+import ValueObjectValidationError from '../../domain/errors/value-object-validation-error';
 import { QueryFailedError } from 'typeorm';
 
 describe(GraphqlExceptionFilterMiddleware.name, () => {

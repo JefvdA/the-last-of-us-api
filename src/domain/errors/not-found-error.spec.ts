@@ -1,4 +1,4 @@
-import NotFoundError from '../../../src/domain/errors/not-found-error';
+import NotFoundError from './not-found-error';
 
 describe('NotFoundError', () => {
   it('should have the correct name', () => {
