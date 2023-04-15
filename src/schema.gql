@@ -2,47 +2,29 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CharacterCreationArgumentSchema {
-  firstName: String!
-  lastName: String!
+type Character {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
-type CharacterCreationResponseSchema {
-  uuid: String!
-}
-
-type CharacterDeletionResponseSchema {
-  uuid: String!
-}
-
-input CharacterFilterOptionsArgumentSchema {
-  firstName: String
-  lastName: String
-}
-
-type CharacterSchema {
-  firstName: String
-  id: String!
-  lastName: String
-}
-
-input CharacterUpdateArgumentSchema {
-  firstName: String!
-  lastName: String!
-  uuid: String!
-}
-
-type CharacterUpdateResponseSchema {
-  uuid: String!
+input CreateCharacterInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 type Mutation {
-  createCharacter(character: CharacterCreationArgumentSchema!): CharacterCreationResponseSchema!
-  deleteCharacter(id: String!): CharacterDeletionResponseSchema!
-  updateCharacter(character: CharacterUpdateArgumentSchema!): CharacterUpdateResponseSchema!
+  createCharacter(createCharacterInput: CreateCharacterInput!): Character!
+  removeCharacter(id: Int!): Character!
+  updateCharacter(updateCharacterInput: UpdateCharacterInput!): Character!
 }
 
 type Query {
-  character(id: String!): CharacterSchema!
-  characters(args: CharacterFilterOptionsArgumentSchema): [CharacterSchema!]!
+  character(id: Int!): Character!
+  characters: [Character!]!
+}
+
+input UpdateCharacterInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

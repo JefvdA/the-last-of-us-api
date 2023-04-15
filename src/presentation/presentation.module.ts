@@ -1,10 +1,19 @@
 import { Module } from '@nestjs/common';
-import ResolversModule from './resolvers/resolvers.module';
-import SchemasModule from './schemas/schemas.module';
-import MappersModule from './mappers/mappers.module';
 import MiddlewareModule from './middleware/middleware.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
-  imports: [ResolversModule, SchemasModule, MappersModule, MiddlewareModule],
+  imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: 'src/schema.gql',
+      sortSchema: true,
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+    }),
+    MiddlewareModule,
+  ],
 })
 export default class PresentationModule {}
