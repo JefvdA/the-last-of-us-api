@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CharactersService } from './characters.service';
 import { CreateCharacterInput } from './dto/create-character.input';
 import { FilterCharactersInput } from './dto/filter-characters.input';
-import { testUuid } from '../constants/test-values';
+import { fakeUuid } from '../constants/fakes';
 import { UpdateCharacterInput } from './dto/update-character.input';
 jest.mock('./characters.service');
 
@@ -52,23 +52,23 @@ describe(CharactersResolver.name, () => {
 
   describe('findOne', () => {
     it('should call CharacterService.findOne with the correct arguments', () => {
-      charactersResolver.findOne(testUuid.value);
+      charactersResolver.findOne(fakeUuid.value);
 
-      expect(charactersService.findOne).toHaveBeenCalledWith(testUuid);
+      expect(charactersService.findOne).toHaveBeenCalledWith(fakeUuid);
     });
   });
 
   describe('updateCharacter', () => {
     it('should call CharacterService.update with the correct arguments', () => {
       const updateCharacterInput = new UpdateCharacterInput();
-      updateCharacterInput.uuid = testUuid.value;
+      updateCharacterInput.uuid = fakeUuid.value;
       updateCharacterInput.firstName = 'Joe';
       updateCharacterInput.lastName = 'Doe';
 
       charactersResolver.updateCharacter(updateCharacterInput);
 
       expect(charactersService.update).toHaveBeenCalledWith(
-        testUuid,
+        fakeUuid,
         updateCharacterInput,
       );
     });
@@ -76,9 +76,9 @@ describe(CharactersResolver.name, () => {
 
   describe('removeCharacter', () => {
     it('should call CharacterService.remove with the correct arguments', () => {
-      charactersResolver.removeCharacter(testUuid.value);
+      charactersResolver.removeCharacter(fakeUuid.value);
 
-      expect(charactersService.remove).toHaveBeenCalledWith(testUuid);
+      expect(charactersService.remove).toHaveBeenCalledWith(fakeUuid);
     });
   });
 });

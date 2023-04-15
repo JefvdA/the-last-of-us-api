@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { Character } from './entities/character.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import {
-  emptyPromise,
-  testCreateCharacterInput,
-  testFilterCharactersInput,
-  testUpdateCharacterInput,
-  testUuid,
-} from '../constants/test-values';
+  fakeCharacterRepository,
+  fakeCreateCharacterInput,
+  fakeFilterCharactersInput,
+  fakeUpdateCharacterInput,
+  fakeUuid,
+} from '../constants/fakes';
 
 describe(CharactersService.name, () => {
   let charactersService: CharactersService;
@@ -17,20 +17,7 @@ describe(CharactersService.name, () => {
 
   beforeEach(async () => {
     const testModule: TestingModule = await Test.createTestingModule({
-      providers: [
-        CharactersService,
-        {
-          provide: getRepositoryToken(Character),
-          useValue: {
-            create: jest.fn(),
-            insert: jest.fn(() => emptyPromise),
-            findBy: jest.fn(() => emptyPromise),
-            findOneBy: jest.fn(() => emptyPromise),
-            update: jest.fn(() => emptyPromise),
-            delete: jest.fn(() => emptyPromise),
-          },
-        },
-      ],
+      providers: [CharactersService, fakeCharacterRepository],
     }).compile();
 
     charactersService = testModule.get<CharactersService>(CharactersService);
@@ -45,18 +32,18 @@ describe(CharactersService.name, () => {
 
   describe('create', () => {
     it('should call CharacterRepository.create with the correct arguments', () => {
-      charactersService.create(testCreateCharacterInput);
+      charactersService.create(fakeCreateCharacterInput);
 
       expect(characterRepo.create).toHaveBeenCalledWith(
-        testCreateCharacterInput,
+        fakeCreateCharacterInput,
       );
     });
 
     it('should call CharacterRepository.insert with the correct arguments', () => {
-      charactersService.create(testCreateCharacterInput);
+      charactersService.create(fakeCreateCharacterInput);
 
       const characterRepoCreateResult = characterRepo.create(
-        testCreateCharacterInput,
+        fakeCreateCharacterInput,
       );
 
       expect(characterRepo.insert).toHaveBeenCalledWith(
@@ -67,41 +54,41 @@ describe(CharactersService.name, () => {
 
   describe('findAll', () => {
     it('should call CharacterRepository.findBy with the correct arguments', () => {
-      charactersService.findAll(testFilterCharactersInput);
+      charactersService.findAll(fakeFilterCharactersInput);
 
       expect(characterRepo.findBy).toHaveBeenCalledWith(
-        testFilterCharactersInput,
+        fakeFilterCharactersInput,
       );
     });
   });
 
   describe('findOne', () => {
     it('should call CharacterRepository.findOneBy with the correct arguments', () => {
-      charactersService.findOne(testUuid);
+      charactersService.findOne(fakeUuid);
 
       expect(characterRepo.findOneBy).toHaveBeenCalledWith({
-        uuid: testUuid.value,
+        uuid: fakeUuid.value,
       });
     });
   });
 
   describe('update', () => {
     it('should call CharacterRepository.update with the correct arguments', () => {
-      charactersService.update(testUuid, testUpdateCharacterInput);
+      charactersService.update(fakeUuid, fakeUpdateCharacterInput);
 
       expect(characterRepo.update).toHaveBeenCalledWith(
-        { uuid: testUuid.value },
-        testUpdateCharacterInput,
+        { uuid: fakeUuid.value },
+        fakeUpdateCharacterInput,
       );
     });
   });
 
   describe('remove', () => {
     it('should call CharacterRepository.delete with the correct arguments', () => {
-      charactersService.remove(testUuid);
+      charactersService.remove(fakeUuid);
 
       expect(characterRepo.delete).toHaveBeenCalledWith({
-        uuid: testUuid.value,
+        uuid: fakeUuid.value,
       });
     });
   });
