@@ -6,6 +6,7 @@ import { UpdateCharacterInput } from './dto/update-character.input';
 import { FilterCharactersInput } from './dto/filter-characters.input';
 import { UpdateCharacterOutput } from './dto/update-character.output';
 import { DeleteCharacterOutput } from './dto/delete-character.output';
+import Uuid from '../domain/value-objects/uuid';
 
 @Resolver(() => Character)
 export class CharactersResolver {
@@ -28,7 +29,7 @@ export class CharactersResolver {
 
   @Query(() => Character, { name: 'character' })
   findOne(@Args('uuid') uuid: string) {
-    return this.charactersService.findOne(uuid);
+    return this.charactersService.findOne(new Uuid(uuid));
   }
 
   @Mutation(() => UpdateCharacterOutput)
@@ -36,13 +37,13 @@ export class CharactersResolver {
     @Args('updateCharacterInput') updateCharacterInput: UpdateCharacterInput,
   ) {
     return this.charactersService.update(
-      updateCharacterInput.uuid,
+      new Uuid(updateCharacterInput.uuid),
       updateCharacterInput,
     );
   }
 
   @Mutation(() => DeleteCharacterOutput)
   removeCharacter(@Args('uuid') uuid: string) {
-    return this.charactersService.remove(uuid);
+    return this.charactersService.remove(new Uuid(uuid));
   }
 }

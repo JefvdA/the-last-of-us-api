@@ -8,6 +8,7 @@ import NotFoundError from '../domain/errors/not-found-error';
 import { FilterCharactersInput } from './dto/filter-characters.input';
 import { UpdateCharacterOutput } from './dto/update-character.output';
 import { DeleteCharacterOutput } from './dto/delete-character.output';
+import Uuid from '../domain/value-objects/uuid';
 
 @Injectable()
 export class CharactersService {
@@ -26,9 +27,9 @@ export class CharactersService {
     return this.characterRepo.findBy(filterOptions || {});
   }
 
-  findOne(uuid: string) {
+  findOne(uuid: Uuid) {
     return this.characterRepo
-      .findOneBy({ uuid: uuid })
+      .findOneBy({ uuid: uuid.value })
       .then((character: Character | null): Character => {
         if (!character) throw new NotFoundError(Character.name);
 
@@ -36,15 +37,15 @@ export class CharactersService {
       });
   }
 
-  update(uuid: string, updateCharacterInput: UpdateCharacterInput) {
+  update(uuid: Uuid, updateCharacterInput: UpdateCharacterInput) {
     return this.characterRepo
-      .update({ uuid: uuid }, updateCharacterInput)
+      .update({ uuid: uuid.value }, updateCharacterInput)
       .then(() => new UpdateCharacterOutput(uuid));
   }
 
-  remove(uuid: string) {
+  remove(uuid: Uuid) {
     return this.characterRepo
-      .delete({ uuid: uuid })
+      .delete({ uuid: uuid.value })
       .then(() => new DeleteCharacterOutput(uuid));
   }
 }
