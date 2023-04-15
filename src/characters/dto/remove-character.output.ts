@@ -2,7 +2,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import Uuid from '../../domain/value-objects/uuid';
 
 @ObjectType()
-export class DeleteCharacterOutput {
+export class RemoveCharacterOutput {
   @Field()
   uuid: string;
 

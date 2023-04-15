@@ -5,7 +5,7 @@ import { CreateCharacterInput } from './dto/create-character.input';
 import { UpdateCharacterInput } from './dto/update-character.input';
 import { FilterCharactersInput } from './dto/filter-characters.input';
 import { UpdateCharacterOutput } from './dto/update-character.output';
-import { DeleteCharacterOutput } from './dto/delete-character.output';
+import { RemoveCharacterOutput } from './dto/remove-character.output';
 import Uuid from '../domain/value-objects/uuid';
 
 @Resolver(() => Character)
@@ -15,7 +15,7 @@ export class CharactersResolver {
   @Mutation(() => Character)
   createCharacter(
     @Args('createCharacterInput') createCharacterInput: CreateCharacterInput,
-  ) {
+  ): Promise<Character> {
     return this.charactersService.create(createCharacterInput);
   }
 
@@ -23,27 +23,27 @@ export class CharactersResolver {
   findAll(
     @Args('filters', { nullable: true })
     filterOptions?: FilterCharactersInput,
-  ) {
+  ): Promise<Character[]> {
     return this.charactersService.findAll(filterOptions);
   }
 
   @Query(() => Character, { name: 'character' })
-  findOne(@Args('uuid') uuid: string) {
+  findOne(@Args('uuid') uuid: string): Promise<Character> {
     return this.charactersService.findOne(new Uuid(uuid));
   }
 
   @Mutation(() => UpdateCharacterOutput)
   updateCharacter(
     @Args('updateCharacterInput') updateCharacterInput: UpdateCharacterInput,
-  ) {
+  ): Promise<UpdateCharacterOutput> {
     return this.charactersService.update(
       new Uuid(updateCharacterInput.uuid),
       updateCharacterInput,
     );
   }
 
-  @Mutation(() => DeleteCharacterOutput)
-  removeCharacter(@Args('uuid') uuid: string) {
+  @Mutation(() => RemoveCharacterOutput)
+  removeCharacter(@Args('uuid') uuid: string): Promise<RemoveCharacterOutput> {
     return this.charactersService.remove(new Uuid(uuid));
   }
 }

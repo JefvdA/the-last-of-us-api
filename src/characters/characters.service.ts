@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import NotFoundError from '../domain/errors/not-found-error';
 import { FilterCharactersInput } from './dto/filter-characters.input';
 import { UpdateCharacterOutput } from './dto/update-character.output';
-import { DeleteCharacterOutput } from './dto/delete-character.output';
+import { RemoveCharacterOutput } from './dto/remove-character.output';
 import Uuid from '../domain/value-objects/uuid';
 
 @Injectable()
@@ -17,17 +17,19 @@ export class CharactersService {
     private readonly characterRepo: Repository<Character>,
   ) {}
 
-  create(createCharacterInput: CreateCharacterInput) {
+  create(createCharacterInput: CreateCharacterInput): Promise<Character> {
     const entity = this.characterRepo.create(createCharacterInput);
 
-    return this.characterRepo.insert(entity).then(() => entity);
+    return this.characterRepo.insert(entity).then((): Character => {
+      return entity;
+    });
   }
 
-  findAll(filterOptions?: FilterCharactersInput) {
+  findAll(filterOptions?: FilterCharactersInput): Promise<Character[]> {
     return this.characterRepo.findBy(filterOptions || {});
   }
 
-  findOne(uuid: Uuid) {
+  findOne(uuid: Uuid): Promise<Character> {
     return this.characterRepo
       .findOneBy({ uuid: uuid.value })
       .then((character: Character | null): Character => {
@@ -37,15 +39,18 @@ export class CharactersService {
       });
   }
 
-  update(uuid: Uuid, updateCharacterInput: UpdateCharacterInput) {
+  update(
+    uuid: Uuid,
+    updateCharacterInput: UpdateCharacterInput,
+  ): Promise<UpdateCharacterOutput> {
     return this.characterRepo
       .update({ uuid: uuid.value }, updateCharacterInput)
       .then(() => new UpdateCharacterOutput(uuid));
   }
 
-  remove(uuid: Uuid) {
+  remove(uuid: Uuid): Promise<RemoveCharacterOutput> {
     return this.characterRepo
       .delete({ uuid: uuid.value })
-      .then(() => new DeleteCharacterOutput(uuid));
+      .then(() => new RemoveCharacterOutput(uuid));
   }
 }
