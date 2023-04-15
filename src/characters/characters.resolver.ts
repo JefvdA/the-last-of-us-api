@@ -1,9 +1,10 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { CharactersService } from './characters.service';
 import { Character } from './entities/character.entity';
 import { CreateCharacterInput } from './dto/create-character.input';
 import { UpdateCharacterInput } from './dto/update-character.input';
 import { FilterCharactersInput } from './dto/filter-characters.input';
+import { UpdateCharacterOutput } from './dto/update-character.output';
 
 @Resolver(() => Character)
 export class CharactersResolver {
@@ -29,7 +30,7 @@ export class CharactersResolver {
     return this.charactersService.findOne(uuid);
   }
 
-  @Mutation(() => Character)
+  @Mutation(() => UpdateCharacterOutput)
   updateCharacter(
     @Args('updateCharacterInput') updateCharacterInput: UpdateCharacterInput,
   ) {

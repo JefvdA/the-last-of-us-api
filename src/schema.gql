@@ -21,7 +21,7 @@ input FilterCharactersInput {
 type Mutation {
   createCharacter(createCharacterInput: CreateCharacterInput!): Character!
   removeCharacter(uuid: String!): Character!
-  updateCharacter(updateCharacterInput: UpdateCharacterInput!): Character!
+  updateCharacter(updateCharacterInput: UpdateCharacterInput!): UpdateCharacterOutput!
 }
 
 type Query {
@@ -32,5 +32,9 @@ type Query {
 input UpdateCharacterInput {
   firstName: String
   lastName: String
+  uuid: String!
+}
+
+type UpdateCharacterOutput {
   uuid: String!
 }

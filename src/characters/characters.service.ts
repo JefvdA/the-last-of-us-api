@@ -6,6 +6,7 @@ import { Character } from './entities/character.entity';
 import { Repository } from 'typeorm';
 import NotFoundError from '../domain/errors/not-found-error';
 import { FilterCharactersInput } from './dto/filter-characters.input';
+import { UpdateCharacterOutput } from './dto/update-character.output';
 
 @Injectable()
 export class CharactersService {
@@ -34,8 +35,10 @@ export class CharactersService {
       });
   }
 
-  update(uuid: string, updateCharacterInput: UpdateCharacterInput) {
-    return `This action updates a #${uuid} character`;
+  async update(uuid: string, updateCharacterInput: UpdateCharacterInput) {
+    return this.characterRepo
+      .update({ uuid: uuid }, updateCharacterInput)
+      .then(() => new UpdateCharacterOutput(uuid));
   }
 
   remove(uuid: string) {
