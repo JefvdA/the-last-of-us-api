@@ -3,6 +3,7 @@ import { CharactersService } from './characters.service';
 import { Character } from './entities/character.entity';
 import { CreateCharacterInput } from './dto/create-character.input';
 import { UpdateCharacterInput } from './dto/update-character.input';
+import { FilterCharactersInput } from './dto/filter-characters.input';
 
 @Resolver(() => Character)
 export class CharactersResolver {
@@ -16,8 +17,11 @@ export class CharactersResolver {
   }
 
   @Query(() => [Character], { name: 'characters' })
-  findAll() {
-    return this.charactersService.findAll();
+  findAll(
+    @Args('filters', { nullable: true })
+    filterOptions?: FilterCharactersInput,
+  ) {
+    return this.charactersService.findAll(filterOptions);
   }
 
   @Query(() => Character, { name: 'character' })

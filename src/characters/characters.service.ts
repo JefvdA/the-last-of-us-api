@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Character } from './entities/character.entity';
 import { Repository } from 'typeorm';
 import NotFoundError from '../domain/errors/not-found-error';
+import { FilterCharactersInput } from './dto/filter-characters.input';
 
 @Injectable()
 export class CharactersService {
@@ -17,8 +18,8 @@ export class CharactersService {
     return 'This action adds a new character';
   }
 
-  findAll() {
-    return this.characterRepo.find();
+  findAll(filterOptions?: FilterCharactersInput) {
+    return this.characterRepo.findBy(filterOptions || {});
   }
 
   findOne(uuid: string) {

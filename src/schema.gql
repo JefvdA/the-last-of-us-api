@@ -13,6 +13,11 @@ input CreateCharacterInput {
   exampleField: Int!
 }
 
+input FilterCharactersInput {
+  firstName: String
+  lastName: String
+}
+
 type Mutation {
   createCharacter(createCharacterInput: CreateCharacterInput!): Character!
   removeCharacter(uuid: String!): Character!
@@ -21,7 +26,7 @@ type Mutation {
 
 type Query {
   character(uuid: String!): Character!
-  characters: [Character!]!
+  characters(filters: FilterCharactersInput): [Character!]!
 }
 
 input UpdateCharacterInput {
