@@ -3,8 +3,9 @@
 # ------------------------------------------------------
 
 type Character {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  firstName: String!
+  lastName: String!
+  uuid: String!
 }
 
 input CreateCharacterInput {
