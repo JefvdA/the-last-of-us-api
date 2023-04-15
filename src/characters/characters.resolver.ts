@@ -21,8 +21,8 @@ export class CharactersResolver {
   }
 
   @Query(() => Character, { name: 'character' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.charactersService.findOne(id);
+  findOne(@Args('uuid') uuid: string) {
+    return this.charactersService.findOne(uuid);
   }
 
   @Mutation(() => Character)
@@ -30,13 +30,13 @@ export class CharactersResolver {
     @Args('updateCharacterInput') updateCharacterInput: UpdateCharacterInput,
   ) {
     return this.charactersService.update(
-      updateCharacterInput.id,
+      updateCharacterInput.uuid,
       updateCharacterInput,
     );
   }
 
   @Mutation(() => Character)
-  removeCharacter(@Args('id', { type: () => Int }) id: number) {
-    return this.charactersService.remove(id);
+  removeCharacter(@Args('uuid') uuid: string) {
+    return this.charactersService.remove(uuid);
   }
 }

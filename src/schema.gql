@@ -15,17 +15,17 @@ input CreateCharacterInput {
 
 type Mutation {
   createCharacter(createCharacterInput: CreateCharacterInput!): Character!
-  removeCharacter(id: Int!): Character!
+  removeCharacter(uuid: String!): Character!
   updateCharacter(updateCharacterInput: UpdateCharacterInput!): Character!
 }
 
 type Query {
-  character(id: Int!): Character!
+  character(uuid: String!): Character!
   characters: [Character!]!
 }
 
 input UpdateCharacterInput {
   """Example field (placeholder)"""
   exampleField: Int
-  id: Int!
+  uuid: String!
 }
