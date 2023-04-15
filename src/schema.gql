@@ -9,8 +9,8 @@ type Character {
 }
 
 input CreateCharacterInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  firstName: String!
+  lastName: String!
 }
 
 input FilterCharactersInput {
@@ -30,7 +30,7 @@ type Query {
 }
 
 input UpdateCharacterInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  firstName: String
+  lastName: String
   uuid: String!
 }

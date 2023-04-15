@@ -15,7 +15,9 @@ export class CharactersService {
   ) {}
 
   create(createCharacterInput: CreateCharacterInput) {
-    return 'This action adds a new character';
+    const entity = this.characterRepo.create(createCharacterInput);
+
+    return this.characterRepo.insert(entity).then(() => entity);
   }
 
   findAll(filterOptions?: FilterCharactersInput) {
