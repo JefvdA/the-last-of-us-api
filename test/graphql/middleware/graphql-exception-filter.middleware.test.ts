@@ -1,4 +1,4 @@
-import GraphqlExceptionFilterMiddleware from '../../../src/presentation/middleware/graphql-exception-filter.middleware';
+import GraphqlExceptionFilterMiddleware from '../../../src/graphql/middleware/graphql-exception-filter.middleware';
 import { HttpStatus } from '@nestjs/common';
 import NotFoundError from '../../../src/domain/errors/not-found-error';
 import ValueObjectValidationError from '../../../src/domain/errors/value-object-validation-error';

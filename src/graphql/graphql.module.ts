@@ -16,4 +16,4 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
     MiddlewareModule,
   ],
 })
-export default class PresentationModule {}
+export default class GraphqlModule {}
