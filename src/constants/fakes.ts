@@ -21,7 +21,7 @@ fakeFilterCharactersInput.lastName = 'Doe';
 
 export const fakeUpdateCharacterInput = new UpdateCharacterInput();
 fakeUpdateCharacterInput.uuid = fakeUuid.value;
-fakeUpdateCharacterInput.firstName = 'Joe';
+fakeUpdateCharacterInput.firstName = 'John';
 fakeUpdateCharacterInput.lastName = 'Doe';
 
 export const fakeCharacterRepository = {
