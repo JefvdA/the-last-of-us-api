@@ -10,6 +10,7 @@ import {
   fakeUpdateCharacterInput,
   fakeUuid,
 } from '../constants/fakes';
+import NotFoundError from '../domain/errors/not-found-error';
 
 describe(CharactersService.name, () => {
   let charactersService: CharactersService;
@@ -50,6 +51,16 @@ describe(CharactersService.name, () => {
         characterRepoCreateResult,
       );
     });
+
+    it('should return the newly created entity', () => {
+      const characterRepoCreateResult = characterRepo.create(
+        fakeCreateCharacterInput,
+      );
+
+      charactersService.create(fakeCreateCharacterInput).then((result) => {
+        expect(result).toEqual(characterRepoCreateResult);
+      });
+    });
   });
 
   describe('findAll', () => {
@@ -60,6 +71,12 @@ describe(CharactersService.name, () => {
         fakeFilterCharactersInput,
       );
     });
+
+    it('should not use any filters if they arent provided', () => {
+      charactersService.findAll();
+
+      expect(characterRepo.findBy).toHaveBeenCalledWith({});
+    });
   });
 
   describe('findOne', () => {
@@ -69,6 +86,14 @@ describe(CharactersService.name, () => {
       expect(characterRepo.findOneBy).toHaveBeenCalledWith({
         uuid: fakeUuid.value,
       });
+    });
+
+    it('should throw a NotFoundError if there was no character found', async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(null);
+
+      await expect(charactersService.findOne(fakeUuid)).rejects.toThrow(
+        NotFoundError,
+      );
     });
   });
 

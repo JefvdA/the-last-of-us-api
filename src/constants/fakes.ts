@@ -5,7 +5,7 @@ import Uuid from '../domain/value-objects/uuid';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Character } from '../characters/entities/character.entity';
 
-export const emptyPromise = new Promise(() => undefined);
+export const emptyPromise = new Promise((resolve) => resolve(undefined));
 
 export const fakeUuid = new Uuid('44241dba-6b16-4516-9e37-793e104da01d');
 
@@ -29,8 +29,10 @@ export const fakeCharacterRepository = {
   useValue: {
     create: jest.fn(() => fakeCharacter),
     insert: jest.fn(() => emptyPromise),
-    findBy: jest.fn(() => emptyPromise),
-    findOneBy: jest.fn(() => emptyPromise),
+    findBy: jest.fn(
+      () => new Promise((resolve) => resolve([fakeCharacter, fakeCharacter])),
+    ),
+    findOneBy: jest.fn(() => new Promise((resolve) => resolve(fakeCharacter))),
     update: jest.fn(() => emptyPromise),
     delete: jest.fn(() => emptyPromise),
   },

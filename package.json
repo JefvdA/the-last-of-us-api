@@ -76,7 +76,8 @@
     ],
     "coveragePathIgnorePatterns": [
       "main.ts",
-      ".module.ts"
+      ".module.ts",
+      "src/constants/fakes.ts"
     ],
     "coverageDirectory": "./coverage",
     "coverageReporters": [
