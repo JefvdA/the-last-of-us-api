@@ -1,15 +1,9 @@
 import { Module } from '@nestjs/common';
-import DomainModule from './domain/domain.module';
+import { CharactersModule } from './characters/characters.module';
 import InfrastructureModule from './infrastructure/infrastructure.module';
-import PresentationModule from './presentation/presentation.module';
-import ApplicationModule from './application/application.module';
+import GraphqlModule from './graphql/graphql.module';
 
 @Module({
-  imports: [
-    DomainModule,
-    InfrastructureModule,
-    PresentationModule,
-    ApplicationModule,
-  ],
+  imports: [InfrastructureModule, GraphqlModule, CharactersModule],
 })
 export default class AppModule {}

@@ -2,47 +2,43 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CharacterCreationArgumentSchema {
-  firstName: String!
-  lastName: String!
-}
-
-type CharacterCreationResponseSchema {
-  uuid: String!
-}
-
-type CharacterDeletionResponseSchema {
-  uuid: String!
-}
-
-input CharacterFilterOptionsArgumentSchema {
-  firstName: String
-  lastName: String
-}
-
-type CharacterSchema {
-  firstName: String
-  id: String!
-  lastName: String
-}
-
-input CharacterUpdateArgumentSchema {
+type Character {
   firstName: String!
   lastName: String!
   uuid: String!
 }
 
-type CharacterUpdateResponseSchema {
-  uuid: String!
+input CreateCharacterInput {
+  firstName: String!
+  lastName: String!
+}
+
+input FilterCharactersInput {
+  firstName: String
+  lastName: String
 }
 
 type Mutation {
-  createCharacter(character: CharacterCreationArgumentSchema!): CharacterCreationResponseSchema!
-  deleteCharacter(id: String!): CharacterDeletionResponseSchema!
-  updateCharacter(character: CharacterUpdateArgumentSchema!): CharacterUpdateResponseSchema!
+  createCharacter(createCharacterInput: CreateCharacterInput!): Character!
+  removeCharacter(uuid: String!): RemoveCharacterOutput!
+  updateCharacter(updateCharacterInput: UpdateCharacterInput!): UpdateCharacterOutput!
 }
 
 type Query {
-  character(id: String!): CharacterSchema!
-  characters(args: CharacterFilterOptionsArgumentSchema): [CharacterSchema!]!
+  character(uuid: String!): Character!
+  characters(filters: FilterCharactersInput): [Character!]!
+}
+
+type RemoveCharacterOutput {
+  uuid: String!
+}
+
+input UpdateCharacterInput {
+  firstName: String
+  lastName: String
+  uuid: String!
+}
+
+type UpdateCharacterOutput {
+  uuid: String!
 }
