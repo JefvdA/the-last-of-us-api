@@ -1,10 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
-import { testDataSourceOptions } from '../../../config/data-source.config.test';
+import { getRepositoryToken } from '@nestjs/typeorm';
 import { Character } from '../../../src/characters/entities/character.entity';
 import { Repository } from 'typeorm';
+import { INestApplication } from '@nestjs/common';
+import * as request from 'supertest';
+import {
+  GET_CHARACTER_BY_UUID,
+  GET_CHARACTERS_FILTER_FIRSTNAME_AND_LASTNAME_QUERY,
+  GET_CHARACTERS_QUERY,
+} from './graphql-requests';
+import AppModule from '../../../src/app.module';
+import { fakeUuid } from '../../../src/constants/fakes';
 
 describe('GraphQL queries to fetch characters', () => {
+  let app: INestApplication;
   let characterRepo: Repository<Character>;
 
   const startingCharacters: Array<Character> = [
@@ -12,17 +21,19 @@ describe('GraphQL queries to fetch characters', () => {
     new Character('Jane', 'Doe'),
   ];
 
+  startingCharacters[0].uuid = fakeUuid.value;
+
   beforeAll(async () => {
     const testModule: TestingModule = await Test.createTestingModule({
-      imports: [
-        TypeOrmModule.forRoot(testDataSourceOptions),
-        TypeOrmModule.forFeature([Character]),
-      ],
+      imports: [AppModule],
     }).compile();
 
     characterRepo = testModule.get<Repository<Character>>(
       getRepositoryToken(Character),
     );
+
+    app = testModule.createNestApplication();
+    await app.init();
   });
 
   beforeEach(async () => {
@@ -30,7 +41,81 @@ describe('GraphQL queries to fetch characters', () => {
     await characterRepo.save(startingCharacters);
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('should setup the tests correctly', () => {
     expect(true).toBeTruthy();
+  });
+
+  describe('findAll', () => {
+    it('should include a characters property body.data', async () => {
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(GET_CHARACTERS_QUERY)
+        .then((res) => {
+          const data = res.body.data;
+
+          expect(data).toHaveProperty('characters');
+        });
+    });
+
+    it('should return all characters from the database', async () => {
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(GET_CHARACTERS_QUERY)
+        .then((res) => {
+          const data = res.body.data;
+
+          const sortedStartingCharacters = startingCharacters.sort(
+            (a: Character, b: Character) =>
+              a.firstName.localeCompare(b.firstName),
+          );
+          const sortedReturnedCharacters = data.characters.sort(
+            (a: Character, b: Character) =>
+              a.firstName.localeCompare(b.firstName),
+          );
+
+          expect(data.characters.length).toEqual(startingCharacters.length);
+          expect(sortedReturnedCharacters).toEqual(sortedStartingCharacters);
+        });
+    });
+
+    it('should filter the results on firstName and lastName if the filters are passed', async () => {
+      const filteredFirstName = 'John';
+      const filteredLastName = 'Doe';
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(
+          GET_CHARACTERS_FILTER_FIRSTNAME_AND_LASTNAME_QUERY(
+            filteredFirstName,
+            filteredLastName,
+          ),
+        )
+        .then((res) => {
+          const characters = res.body.data.characters;
+
+          expect(characters.length).toEqual(1); // 1 starting character is named 'John Doe'
+          expect(characters[0].firstName).toEqual(filteredFirstName);
+          expect(characters[0].lastName).toEqual(filteredLastName);
+        });
+    });
+  });
+
+  describe('findOne', () => {
+    it('should return the character with the requested uuid', async () => {
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(GET_CHARACTER_BY_UUID(startingCharacters[0].uuid)) // We are searching for the first starting character
+        .then((res) => {
+          const character: Character = res.body.data.character;
+
+          expect(character.uuid).toEqual(startingCharacters[0].uuid);
+          expect(character.firstName).toEqual(startingCharacters[0].firstName);
+          expect(character.lastName).toEqual(startingCharacters[0].lastName);
+        });
+    });
   });
 });
