@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Character } from '../../../src/characters/entities/character.entity';
 import { Repository } from 'typeorm';
-import { INestApplication } from '@nestjs/common';
+import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import {
   GET_CHARACTER_BY_UUID,
@@ -115,6 +115,40 @@ describe('GraphQL queries to fetch characters', () => {
           expect(character.uuid).toEqual(startingCharacters[0].uuid);
           expect(character.firstName).toEqual(startingCharacters[0].firstName);
           expect(character.lastName).toEqual(startingCharacters[0].lastName);
+        });
+    });
+
+    it('should return not found error if there is no character with the requested uuid', async () => {
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(GET_CHARACTER_BY_UUID('45f37235-9c55-4c52-88e1-49db43e0810a'))
+        .then((res) => {
+          const error = res.body.errors[0];
+
+          expect(error.message).toEqual('Character was not found');
+          expect(error.extensions.statusCode).toEqual(HttpStatus.NOT_FOUND);
+          expect(error.extensions.code).toEqual(
+            HttpStatus[HttpStatus.NOT_FOUND],
+          );
+        });
+    });
+
+    it('should return validation error if the requested uuid was invalid', async () => {
+      const invalidUuid = 'this is an invalid uuid';
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(GET_CHARACTER_BY_UUID(invalidUuid))
+        .then((res) => {
+          const error = res.body.errors[0];
+
+          expect(error.message).toEqual(
+            `${invalidUuid} is an invalid value for Uuid`,
+          );
+          expect(error.extensions.statusCode).toEqual(HttpStatus.BAD_REQUEST);
+          expect(error.extensions.code).toEqual(
+            HttpStatus[HttpStatus.BAD_REQUEST],
+          );
         });
     });
   });
