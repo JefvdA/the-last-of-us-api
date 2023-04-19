@@ -1,14 +1,21 @@
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Character } from '../../../src/characters/entities/character.entity';
-import { fakeUuid } from '../../../src/constants/fakes';
+import {
+  fakeUpdateCharacterInput,
+  fakeUuid,
+} from '../../../src/constants/fakes';
 import { Test, TestingModule } from '@nestjs/testing';
 import AppModule from '../../../src/app.module';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import * as request from 'supertest';
-import { CREATE_CHARACTER_MUTATION } from './graphql-requests';
+import {
+  CREATE_CHARACTER_MUTATION,
+  UPDATE_CHARACTER_MUTATION,
+} from './graphql-requests';
 import Uuid from '../../../src/domain/value-objects/uuid';
 import ValueObjectValidationError from '../../../src/domain/errors/value-object-validation-error';
+import { UpdateCharacterOutput } from '../../../src/characters/dto/update-character.output';
 
 describe('GraphQL mutations to for (c)RUD operations on characters', () => {
   let app: INestApplication;
@@ -18,8 +25,6 @@ describe('GraphQL mutations to for (c)RUD operations on characters', () => {
     new Character('John', 'Doe'),
     new Character('Jane', 'Doe'),
   ];
-
-  startingCharacters[0].uuid = fakeUuid.value;
 
   beforeAll(async () => {
     const testModule: TestingModule = await Test.createTestingModule({
@@ -95,6 +100,101 @@ describe('GraphQL mutations to for (c)RUD operations on characters', () => {
       await request(app.getHttpServer())
         .post('/graphql')
         .send(CREATE_CHARACTER_MUTATION(existingFirstName, existingLastName))
+        .then((res) => {
+          const error = res.body.errors[0];
+
+          expect(error.extensions.statusCode).toEqual(HttpStatus.CONFLICT);
+          expect(error.extensions.code).toEqual(
+            HttpStatus[HttpStatus.CONFLICT],
+          );
+        });
+    });
+  });
+
+  describe('updateCharacter', () => {
+    it('should include a updateCharacter property in body.data', async () => {
+      const existingUuid = startingCharacters[0].uuid;
+      const newFirstName = 'Jack';
+      const newLastname = 'Doe';
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(
+          UPDATE_CHARACTER_MUTATION(existingUuid, newFirstName, newLastname),
+        )
+        .then((res) => {
+          const data = res.body.data;
+
+          expect(data).toHaveProperty('updateCharacter');
+        });
+    });
+
+    it('should response with the uuid of the updated character', async () => {
+      const existingUuid = startingCharacters[0].uuid;
+      const newFirstName = 'Jack';
+      const newLastname = 'Doe';
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(
+          UPDATE_CHARACTER_MUTATION(existingUuid, newFirstName, newLastname),
+        )
+        .then((res) => {
+          const updateCharacterOutput: UpdateCharacterOutput =
+            res.body.data.updateCharacter;
+
+          expect(updateCharacterOutput.uuid).toEqual(existingUuid);
+        });
+    });
+
+    it(`should update the character's firstName and lastName`, async () => {
+      const existingUuid = startingCharacters[0].uuid;
+      const newFirstName = 'Jack';
+      const newLastname = 'Doe';
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(
+          UPDATE_CHARACTER_MUTATION(existingUuid, newFirstName, newLastname),
+        )
+        .then(async (res) => {
+          const updatedCharacter: Character | null =
+            await characterRepo.findOneBy({ uuid: existingUuid });
+
+          expect(updatedCharacter).toBeDefined();
+          expect(updatedCharacter?.firstName).toEqual(newFirstName);
+          expect(updatedCharacter?.lastName).toEqual(newLastname);
+        });
+    });
+
+    it(`should return a not found error if the character to update doesn't exist`, async () => {
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(UPDATE_CHARACTER_MUTATION(fakeUuid.value, 'John', 'Doe'))
+        .then((res) => {
+          const error = res.body.errors[0];
+
+          expect(error.extensions.statusCode).toEqual(HttpStatus.NOT_FOUND);
+          expect(error.extensions.code).toEqual(
+            HttpStatus[HttpStatus.NOT_FOUND],
+          );
+        });
+    });
+
+    it(`should return a conflict error if there's already a character with this firstName-lastName combination`, async () => {
+      const existingUuid = startingCharacters[0].uuid;
+      const existingFirstName = startingCharacters[1].firstName;
+      const existingLastName = startingCharacters[1].lastName;
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(
+          UPDATE_CHARACTER_MUTATION(
+            existingUuid,
+            existingFirstName,
+            existingLastName,
+          ),
+        )
         .then((res) => {
           const error = res.body.errors[0];
 

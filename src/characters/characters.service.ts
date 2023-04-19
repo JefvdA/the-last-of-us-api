@@ -39,7 +39,7 @@ export class CharactersService {
       });
   }
 
-  update(
+  async update(
     uuid: Uuid,
     updateCharacterInput: UpdateCharacterInput,
   ): Promise<UpdateCharacterOutput> {

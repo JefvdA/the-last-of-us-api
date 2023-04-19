@@ -21,8 +21,6 @@ describe('GraphQL queries to fetch characters', () => {
     new Character('Jane', 'Doe'),
   ];
 
-  startingCharacters[0].uuid = fakeUuid.value;
-
   beforeAll(async () => {
     const testModule: TestingModule = await Test.createTestingModule({
       imports: [AppModule],

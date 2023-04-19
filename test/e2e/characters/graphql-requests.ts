@@ -58,16 +58,39 @@ export const CREATE_CHARACTER_MUTATION = (
 ) => {
   return {
     query: `
-    mutation CreateCharacter($createCharacterInput: CreateCharacterInput!) {
-      createCharacter(createCharacterInput: $createCharacterInput) {
-        uuid
-        firstName
-        lastName
+      mutation CreateCharacter($createCharacterInput: CreateCharacterInput!) {
+        createCharacter(createCharacterInput: $createCharacterInput) {
+          uuid
+          firstName
+          lastName
+        }
       }
-    }
-  `,
+    `,
     variables: {
       createCharacterInput: {
+        firstName: firstName,
+        lastName: lastName,
+      },
+    },
+  };
+};
+
+export const UPDATE_CHARACTER_MUTATION = (
+  uuid: string,
+  firstName: string,
+  lastName: string,
+) => {
+  return {
+    query: `
+      mutation UpdateCharacter($updateCharacterInput: UpdateCharacterInput!) {
+        updateCharacter(updateCharacterInput: $updateCharacterInput) {
+          uuid
+        }
+      }
+    `,
+    variables: {
+      updateCharacterInput: {
+        uuid: uuid,
         firstName: firstName,
         lastName: lastName,
       },
