@@ -1,3 +1,5 @@
+import { fakeCharacter } from '../../../src/constants/fakes';
+
 export const GET_CHARACTERS_QUERY = {
   query: `
     query {
@@ -46,6 +48,29 @@ export const GET_CHARACTER_BY_UUID = (uuid: string) => {
     `,
     variables: {
       uuid: uuid,
+    },
+  };
+};
+
+export const CREATE_CHARACTER_MUTATION = (
+  firstName: string,
+  lastName: string,
+) => {
+  return {
+    query: `
+    mutation CreateCharacter($createCharacterInput: CreateCharacterInput!) {
+      createCharacter(createCharacterInput: $createCharacterInput) {
+        uuid
+        firstName
+        lastName
+      }
+    }
+  `,
+    variables: {
+      createCharacterInput: {
+        firstName: firstName,
+        lastName: lastName,
+      },
     },
   };
 };
