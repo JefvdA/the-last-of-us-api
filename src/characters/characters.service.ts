@@ -39,13 +39,17 @@ export class CharactersService {
       });
   }
 
-  async update(
+  update(
     uuid: Uuid,
     updateCharacterInput: UpdateCharacterInput,
   ): Promise<UpdateCharacterOutput> {
-    return this.characterRepo
-      .update({ uuid: uuid.value }, updateCharacterInput)
-      .then(() => new UpdateCharacterOutput(uuid));
+    return this.findOne(uuid).then(() => {
+      return this.characterRepo
+        .update({ uuid: uuid.value }, updateCharacterInput)
+        .then(() => {
+          return new UpdateCharacterOutput(uuid);
+        });
+    });
   }
 
   remove(uuid: Uuid): Promise<RemoveCharacterOutput> {
