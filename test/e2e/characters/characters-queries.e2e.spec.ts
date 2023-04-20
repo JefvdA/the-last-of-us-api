@@ -10,7 +10,6 @@ import {
   GET_CHARACTERS_QUERY,
 } from './graphql-requests';
 import AppModule from '../../../src/app.module';
-import { fakeUuid } from '../../../src/constants/fakes';
 
 describe('GraphQL queries to fetch characters', () => {
   let app: INestApplication;

@@ -1,5 +1,3 @@
-import { fakeCharacter } from '../../../src/constants/fakes';
-
 export const GET_CHARACTERS_QUERY = {
   query: `
     query {

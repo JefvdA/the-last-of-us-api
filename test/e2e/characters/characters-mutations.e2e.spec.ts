@@ -1,10 +1,7 @@
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Character } from '../../../src/characters/entities/character.entity';
-import {
-  fakeUpdateCharacterInput,
-  fakeUuid,
-} from '../../../src/constants/fakes';
+import { fakeUuid } from '../../../src/constants/fakes';
 import { Test, TestingModule } from '@nestjs/testing';
 import AppModule from '../../../src/app.module';
 import { getRepositoryToken } from '@nestjs/typeorm';
@@ -157,7 +154,7 @@ describe('GraphQL mutations to for (c)RUD operations on characters', () => {
         .send(
           UPDATE_CHARACTER_MUTATION(existingUuid, newFirstName, newLastname),
         )
-        .then(async (res) => {
+        .then(async () => {
           const updatedCharacter: Character | null =
             await characterRepo.findOneBy({ uuid: existingUuid });
 
