@@ -4,7 +4,7 @@
   "description": "The last of us API is a GraphQL API based on the game and television show 'the last of us'",
   "author": "Jef van der Avoirt",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"{src,test}/**/*.ts\"",
