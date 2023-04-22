@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Character } from './entities/character.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import {
+  fakeCharacter,
   fakeCharacterRepository,
   fakeCreateCharacterInput,
   fakeFilterCharactersInput,
@@ -11,6 +12,7 @@ import {
   fakeUuid,
 } from '../constants/fakes';
 import NotFoundError from '../domain/errors/not-found-error';
+import Uuid from '../domain/value-objects/uuid';
 
 describe(CharactersService.name, () => {
   let charactersService: CharactersService;
@@ -98,23 +100,49 @@ describe(CharactersService.name, () => {
   });
 
   describe('update', () => {
-    it('should call CharacterRepository.update with the correct arguments', () => {
-      charactersService.update(fakeUuid, fakeUpdateCharacterInput);
+    it('should call CharacterRepository.update with the correct arguments', async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(fakeCharacter);
 
-      expect(characterRepo.update).toHaveBeenCalledWith(
-        { uuid: fakeUuid.value },
+      await charactersService.update(
+        new Uuid(fakeCharacter.uuid),
         fakeUpdateCharacterInput,
       );
+
+      expect(characterRepo.update).toHaveBeenCalledWith(
+        { uuid: fakeCharacter.uuid },
+        fakeUpdateCharacterInput,
+      );
+    });
+
+    it(`should throw a NotFoundError if the character to update doesn't exist`, async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(null);
+
+      await expect(
+        charactersService.update(
+          new Uuid(fakeCharacter.uuid),
+          fakeUpdateCharacterInput,
+        ),
+      ).rejects.toThrow(NotFoundError);
     });
   });
 
   describe('remove', () => {
-    it('should call CharacterRepository.delete with the correct arguments', () => {
-      charactersService.remove(fakeUuid);
+    it('should call CharacterRepository.delete with the correct arguments', async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(fakeCharacter);
+
+      await charactersService.remove(new Uuid(fakeCharacter.uuid));
 
       expect(characterRepo.delete).toHaveBeenCalledWith({
-        uuid: fakeUuid.value,
+        uuid: fakeCharacter.uuid,
       });
+    });
+
+    it(`should throw a NotFoundError if the character to remove doesn't exits`, async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(null);
+
+      await expect(charactersService.remove(fakeUuid)).rejects.toThrow(
+        NotFoundError,
+      );
     });
   });
 });
