@@ -1,12 +1,16 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 
-export const dataSourceOptions: DataSourceOptions = {
+export const dataSourceSimpleOptions: DataSourceOptions = {
   type: 'mysql',
   host: 'db',
   port: 3306,
   username: 'root',
   password: 'root',
-  database: 'the-last-of-us-db',
+  database: 'the-last-of-us-db'
+};
+
+const dataSourceOptions: DataSourceOptions = {
+  ...dataSourceSimpleOptions,
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
 };
