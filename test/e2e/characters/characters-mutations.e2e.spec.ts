@@ -8,11 +8,13 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import * as request from 'supertest';
 import {
   CREATE_CHARACTER_MUTATION,
+  REMOVE_CHARACTER_MUTATION,
   UPDATE_CHARACTER_MUTATION,
 } from './graphql-requests';
 import Uuid from '../../../src/domain/value-objects/uuid';
 import ValueObjectValidationError from '../../../src/domain/errors/value-object-validation-error';
 import { UpdateCharacterOutput } from '../../../src/characters/dto/update-character.output';
+import { RemoveCharacterOutput } from '../../../src/characters/dto/remove-character.output';
 
 describe('GraphQL mutations to for (c)RUD operations on characters', () => {
   let app: INestApplication;
@@ -198,6 +200,64 @@ describe('GraphQL mutations to for (c)RUD operations on characters', () => {
           expect(error.extensions.statusCode).toEqual(HttpStatus.CONFLICT);
           expect(error.extensions.code).toEqual(
             HttpStatus[HttpStatus.CONFLICT],
+          );
+        });
+    });
+  });
+
+  describe('removeCharacter', () => {
+    it('should include a removeCharacter property in body.data', async () => {
+      const existingUuid = startingCharacters[0].uuid;
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(REMOVE_CHARACTER_MUTATION(existingUuid))
+        .then((res) => {
+          const data = res.body.data;
+
+          expect(data).toHaveProperty('removeCharacter');
+        });
+    });
+
+    it('should include the uuid of the removed character in the response', async () => {
+      const existingUuid = startingCharacters[0].uuid;
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(REMOVE_CHARACTER_MUTATION(existingUuid))
+        .then((res) => {
+          const removeCharacterOutput: RemoveCharacterOutput =
+            res.body.data.removeCharacter;
+
+          expect(removeCharacterOutput.uuid).toEqual(existingUuid);
+        });
+    });
+
+    it('should remove the character from the database', async () => {
+      const existingUuid = startingCharacters[0].uuid;
+
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(REMOVE_CHARACTER_MUTATION(existingUuid))
+        .then(() => {
+          characterRepo
+            .findOneBy({ uuid: existingUuid })
+            .then((removedCharacter) => {
+              expect(removedCharacter).toBeNull();
+            });
+        });
+    });
+
+    it(`should return a not found error if the character to remove doesn't exist`, async () => {
+      await request(app.getHttpServer())
+        .post('/graphql')
+        .send(REMOVE_CHARACTER_MUTATION(fakeUuid.value))
+        .then((res) => {
+          const error = res.body.errors[0];
+
+          expect(error.extensions.statusCode).toEqual(HttpStatus.NOT_FOUND);
+          expect(error.extensions.code).toEqual(
+            HttpStatus[HttpStatus.NOT_FOUND],
           );
         });
     });

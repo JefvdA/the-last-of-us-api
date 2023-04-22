@@ -53,8 +53,10 @@ export class CharactersService {
   }
 
   remove(uuid: Uuid): Promise<RemoveCharacterOutput> {
-    return this.characterRepo
-      .delete({ uuid: uuid.value })
-      .then(() => new RemoveCharacterOutput(uuid));
+    return this.findOne(uuid).then(() => {
+      return this.characterRepo
+        .delete({ uuid: uuid.value })
+        .then(() => new RemoveCharacterOutput(uuid));
+    });
   }
 }

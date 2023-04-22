@@ -127,12 +127,22 @@ describe(CharactersService.name, () => {
   });
 
   describe('remove', () => {
-    it('should call CharacterRepository.delete with the correct arguments', () => {
-      charactersService.remove(fakeUuid);
+    it('should call CharacterRepository.delete with the correct arguments', async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(fakeCharacter);
+
+      await charactersService.remove(new Uuid(fakeCharacter.uuid));
 
       expect(characterRepo.delete).toHaveBeenCalledWith({
-        uuid: fakeUuid.value,
+        uuid: fakeCharacter.uuid,
       });
+    });
+
+    it(`should throw a NotFoundError if the character to remove doesn't exits`, async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(null);
+
+      await expect(charactersService.remove(fakeUuid)).rejects.toThrow(
+        NotFoundError,
+      );
     });
   });
 });

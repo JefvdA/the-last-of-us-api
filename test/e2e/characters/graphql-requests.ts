@@ -95,3 +95,18 @@ export const UPDATE_CHARACTER_MUTATION = (
     },
   };
 };
+
+export const REMOVE_CHARACTER_MUTATION = (uuid: string) => {
+  return {
+    query: `
+      mutation RemoveCharacter($uuid: String!) {
+        removeCharacter(uuid: $uuid) {
+          uuid
+        }
+      }
+    `,
+    variables: {
+      uuid: uuid,
+    },
+  };
+};
