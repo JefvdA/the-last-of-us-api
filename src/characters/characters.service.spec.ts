@@ -113,6 +113,17 @@ describe(CharactersService.name, () => {
         fakeUpdateCharacterInput,
       );
     });
+
+    it(`should throw a NotFoundError if the character to update doesn't exist`, async () => {
+      jest.spyOn(characterRepo, 'findOneBy').mockResolvedValue(null);
+
+      await expect(
+        charactersService.update(
+          new Uuid(fakeCharacter.uuid),
+          fakeUpdateCharacterInput,
+        ),
+      ).rejects.toThrow(NotFoundError);
+    });
   });
 
   describe('remove', () => {
