@@ -16,7 +16,6 @@ It looks like this:
 APP_PORT=3000 # The port on which the API will be available on the docker host
 
 # Setup for the database
-DB_TYPE=mysql
 DB_HOST=db
 DB_PORT=3306
 DB_USERNAME=username
