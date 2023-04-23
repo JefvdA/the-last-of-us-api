@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && npm run migration:run",
     "format": "prettier --write \"{src,test}/**/*.ts\"",
     "format:check": "prettier --check \"{src,test}/**/*.ts\"",
     "start": "nest start",
