@@ -10,6 +10,8 @@ const typeOrmConfig =
     : {
         ...dataSourceSimpleOptions,
         autoLoadEntities: true,
+        migrations: ['dist/migrations/**/*.js'],
+        migrationsRun: true,
       };
 
 @Module({
