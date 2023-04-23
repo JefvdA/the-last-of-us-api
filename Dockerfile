@@ -3,11 +3,11 @@ FROM node:18.15-alpine AS builder
 WORKDIR /app
 
 COPY ./package* .
-CMD npm install
+RUN npm install
 
 COPY . .
 
-CMD npm run build
+RUN npm run build
 
 FROM node:18.15-alpine AS prod
 
